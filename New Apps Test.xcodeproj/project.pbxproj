@@ -127,8 +127,8 @@
 		048E7C712C32ACB000B653F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B27DF7BD2CECE475008000C4 /* Feed */,
 				048E7C652C2F08B500B653F4 /* RootView.swift */,
-				14374FB32B989FD500131332 /* FeedView.swift */,
 				048E7C6D2C2F3CE900B653F4 /* SharePhotoView.swift */,
 				14BEC9942C2DC39B009D8493 /* ThreadChatView.swift */,
 				048E7C6B2C2F3C6000B653F4 /* FriendsView.swift */,
@@ -230,6 +230,14 @@
 				B27DF7BB2CECE326008000C4 /* ImageInfoDTO.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		B27DF7BD2CECE475008000C4 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				14374FB32B989FD500131332 /* FeedView.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
