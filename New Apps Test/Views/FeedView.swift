@@ -40,8 +40,8 @@ struct FeedView: View {
             }
         }
         .task {
-            let stringUrls = await imageService.getFeaturedPhotos()
-            let urls = stringUrls.map { URL(string: $0)! }
+            let stringUrls = await imageService.getPhotos(for: 1)
+            let urls = stringUrls.map { $0.urls.regular }.map { URL(string: $0)! }
             sharedPhotos = urls.map { SharedPhoto(author: User.random, contentSource: .url($0), chatThread: Thread.mock) }
         }
     }
