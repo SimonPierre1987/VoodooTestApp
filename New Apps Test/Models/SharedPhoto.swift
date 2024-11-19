@@ -17,7 +17,7 @@ import Foundation
 import SwiftUI
 
 struct SharedPhoto: Identifiable {
-    let id = UUID()
+    let id = UUID() // TODO: use the backend id
     let author: User
     let contentSource: ContentSource
     let chatThread: Thread

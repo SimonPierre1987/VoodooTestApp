@@ -16,20 +16,26 @@
 import SwiftUI
 
 struct FeedView: View {
+    // MARK: - Services
+    private let photoDownloader = PhotosDownloader()
 
-    var imageService = UnsplashService()
+    // MARK: - States
     @State var sharedPhotos: [SharedPhoto] = []
-    
+    @State var lastDisplayedPhoto: SharedPhoto?
+
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack {
-                    listHeaderView
+                LazyVStack {
+                    self.listHeaderView
 
                     ForEach(sharedPhotos, id: \.self) { sharedPhoto in
                         NavigationLink(value: sharedPhoto) {
-                            FeedItemView(sharedPhoto: sharedPhoto)
-                                .padding(.bottom)
+                            FeedItemView(
+                                sharedPhoto: sharedPhoto,
+                                lastDisplayedPhoto: self.$lastDisplayedPhoto
+                            )
+                            .padding(.bottom)
                         }
                     }
                 }
@@ -39,13 +45,56 @@ struct FeedView: View {
                 }
             }
         }
+        .onChange(of: self.lastDisplayedPhoto, { oldValue, newValue in
+            guard let lastDisplayedPhoto = newValue else { return }
+            guard let photoIndex = self.sharedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
+
+            Task { await self.fetchNextPage(for: photoIndex) }
+        })
         .task {
-            let stringUrls = await imageService.getPhotos(for: 1)
-            let urls = stringUrls.map { $0.urls.regular }.map { URL(string: $0)! }
-            sharedPhotos = urls.map { SharedPhoto(author: User.random, contentSource: .url($0), chatThread: Thread.mock) }
+            await self.fetch(nextPage: 1)
         }
     }
+}
 
+// MARK: - Pages to fetch
+private extension FeedView {
+    private func fetchNextPage(for photoIndex: Int) async {
+        guard let page = self.nextPageToLoad(for: photoIndex) else { return }
+        await self.fetch(nextPage: page)
+    }
+
+    private func fetch(nextPage: Page) async {
+        let newPhotos = await self.photoDownloader.photos(for: nextPage)
+        let newSharedPhotos = self.toSharedPhotos(photos: newPhotos)
+        self.sharedPhotos.append(contentsOf: newSharedPhotos)
+    }
+
+    private func nextPageToLoad(for photoIndex: Int) -> Page? {
+        if !self.shouldFetchNextPage(for: photoIndex) { return nil }
+        if FeedConstant.photosPerPage == 0 { return nil }
+        let page = (photoIndex + FeedConstant.nextPhotoThreshold) / FeedConstant.photosPerPage
+        let nextPage = page + 1
+        return nextPage
+    }
+
+    private func shouldFetchNextPage(for photoIndex: Int) -> Bool {
+        return photoIndex == self.sharedPhotos.count - FeedConstant.nextPhotoThreshold
+    }
+}
+
+// MARK: - Helpers
+private extension FeedView {
+    private func toSharedPhotos(photos: [ImageInfo]) -> [SharedPhoto] {
+        return photos
+            .map { $0.urls.regular }
+            .compactMap { URL(string: $0) }
+            .map { SharedPhoto(author: User.random, contentSource: .url($0), chatThread: Thread.mock) }
+    }
+}
+
+// MARK: - Share Header View
+private extension FeedView {
     @ViewBuilder
     private var listHeaderView: some View {
         HStack {

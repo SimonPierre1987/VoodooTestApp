@@ -12,6 +12,9 @@ struct FeedItemView: View {
 
     let sharedPhoto: SharedPhoto
 
+    // MARK: - State
+    @Binding var lastDisplayedPhoto: SharedPhoto?
+
     var body: some View {
         VStack {
             switch sharedPhoto.contentSource {
@@ -40,6 +43,9 @@ struct FeedItemView: View {
             }
             .font(.caption)
             .foregroundStyle(.gray)
+        }
+        .onAppear {
+            self.lastDisplayedPhoto = self.sharedPhoto
         }
         .padding(.horizontal)
     }

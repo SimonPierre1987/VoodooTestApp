@@ -15,13 +15,17 @@
 
 import Foundation
 
-final class UnsplashService {
+protocol UnsplashServiceProtocol {
+    func getPhotos(for page: Int) async -> [ImageInfo]
+}
+
+final class UnsplashService: UnsplashServiceProtocol {
     private let appId = "575727"
     private let networkManager = NetworkManager()
 
     func getPhotos(for page: Int) async -> [ImageInfo] {
         do {
-            let endpoint = UnsplashAPIEndpoint.photo(page: page, countPerPage: 20)
+            let endpoint = UnsplashAPIEndpoint.photo(page: page, countPerPage: FeedConstant.photosPerPage)
             return try await self.networkManager.performRequest(with: endpoint)
         } catch {
             return []

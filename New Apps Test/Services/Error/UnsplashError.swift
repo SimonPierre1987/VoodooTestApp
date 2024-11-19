@@ -8,6 +8,7 @@
 import Foundation
 
 enum UnsplashError: Error {
+    case unknown
     case incorrectUrl
     case clientError(_ error: Error?)
     case serverError(_ response: URLResponse?)

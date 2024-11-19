@@ -30,6 +30,8 @@
 		B27DF7B82CECD7AC008000C4 /* UnsplashError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B72CECD7AC008000C4 /* UnsplashError.swift */; };
 		B27DF7BC2CECE326008000C4 /* ImageInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7BB2CECE326008000C4 /* ImageInfoDTO.swift */; };
 		B27DF7C02CECE4AE008000C4 /* FeedItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7BF2CECE4AE008000C4 /* FeedItemView.swift */; };
+		B27DF7C32CECE574008000C4 /* PhotosDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7C22CECE574008000C4 /* PhotosDownloader.swift */; };
+		B27DF7C62CECE93C008000C4 /* FeedConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7C52CECE93C008000C4 /* FeedConstant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		B27DF7B72CECD7AC008000C4 /* UnsplashError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashError.swift; sourceTree = "<group>"; };
 		B27DF7BB2CECE326008000C4 /* ImageInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfoDTO.swift; sourceTree = "<group>"; };
 		B27DF7BF2CECE4AE008000C4 /* FeedItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemView.swift; sourceTree = "<group>"; };
+		B27DF7C22CECE574008000C4 /* PhotosDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDownloader.swift; sourceTree = "<group>"; };
+		B27DF7C52CECE93C008000C4 /* FeedConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedConstant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,8 +224,9 @@
 		B27DF7B92CECE303008000C4 /* PhotoService */ = {
 			isa = PBXGroup;
 			children = (
-				B27DF7BA2CECE318008000C4 /* DTO */,
 				14374FDC2B98A02600131332 /* UnsplashService.swift */,
+				B27DF7BA2CECE318008000C4 /* DTO */,
+				B27DF7C22CECE574008000C4 /* PhotosDownloader.swift */,
 			);
 			path = PhotoService;
 			sourceTree = "<group>";
@@ -239,6 +244,7 @@
 			children = (
 				14374FB32B989FD500131332 /* FeedView.swift */,
 				B27DF7BE2CECE4A0008000C4 /* FeedItemView */,
+				B27DF7C42CECE933008000C4 /* Constant */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -249,6 +255,14 @@
 				B27DF7BF2CECE4AE008000C4 /* FeedItemView.swift */,
 			);
 			path = FeedItemView;
+			sourceTree = "<group>";
+		};
+		B27DF7C42CECE933008000C4 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				B27DF7C52CECE93C008000C4 /* FeedConstant.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,6 +406,7 @@
 				B27DF7B82CECD7AC008000C4 /* UnsplashError.swift in Sources */,
 				048E7C6C2C2F3C6000B653F4 /* FriendsView.swift in Sources */,
 				048E7C682C2F08EA00B653F4 /* SettingsView.swift in Sources */,
+				B27DF7C32CECE574008000C4 /* PhotosDownloader.swift in Sources */,
 				14374FB22B989FD500131332 /* New_Apps_TestApp.swift in Sources */,
 				048E7C6E2C2F3CE900B653F4 /* SharePhotoView.swift in Sources */,
 				14BEC9992C2DC3D6009D8493 /* Thread.swift in Sources */,
@@ -399,6 +414,7 @@
 				B27DF7B52CECD753008000C4 /* NetworkManager.swift in Sources */,
 				B27DF7B32CECD60A008000C4 /* UnsplashAPIEndpoint.swift in Sources */,
 				14374FDD2B98A02600131332 /* UnsplashService.swift in Sources */,
+				B27DF7C62CECE93C008000C4 /* FeedConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
