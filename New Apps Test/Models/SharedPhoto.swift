@@ -30,12 +30,12 @@ struct SharedPhoto: Identifiable {
 }
 
 extension SharedPhoto {
-    init(imageInfo: ImageDTO,
+    init(imageDTO: ImageDTO,
          chatThread: Thread) {
-        let url = URL(string: imageInfo.urls.regular)!
+        let url = URL(string: imageDTO.urls.regular)!
         self.contentSource = .url(url)
         self.chatThread = chatThread
-        self.author = UserEntity(userDTO: imageInfo.user)
+        self.author = UserEntity(userDTO: imageDTO.user)
     }
 }
 

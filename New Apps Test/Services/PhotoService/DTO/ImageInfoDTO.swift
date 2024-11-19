@@ -11,6 +11,8 @@ struct ImageDTO: Codable {
     let id: String
     let urls: ImageUrlDTO
     let user: UserDTO
+    let description: String?
+    let likedByUser: Bool?
 }
 
 struct ImageUrlDTO: Codable {
@@ -19,6 +21,6 @@ struct ImageUrlDTO: Codable {
 
 extension Array where Element == ImageDTO {
     func toSharedPhoto() -> [SharedPhoto] {
-        return self.map { SharedPhoto(imageInfo: $0, chatThread: Thread.mock) }
+        return self.map { SharedPhoto(imageDTO: $0, chatThread: Thread.mock) }
     }
 }

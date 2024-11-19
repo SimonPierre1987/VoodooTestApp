@@ -66,7 +66,7 @@ private extension UserProfileView {
         do {
             let userPhotos = try await self.userService.getPhotos(for: self.user.username )
             self.sharedPhotos = userPhotos
-                .map { SharedPhoto(imageInfo: $0, chatThread: Thread.mock )}
+                .map { SharedPhoto(imageDTO: $0, chatThread: Thread.mock )}
             self.userPhotosAlreadyFetched = true
         } catch {
             // Nothing to do
