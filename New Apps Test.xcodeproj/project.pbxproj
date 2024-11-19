@@ -156,10 +156,10 @@
 		048E7C702C32ACA700B653F4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B27DF7C72CECF87A008000C4 /* User */,
+				B27DF7F52CED53CD008000C4 /* PhotoDownloader */,
+				B27DF7F42CED53B8008000C4 /* NetworkManager */,
+				B27DF7C72CECF87A008000C4 /* UserService */,
 				B27DF7B92CECE303008000C4 /* PhotoService */,
-				B27DF7B62CECD77E008000C4 /* Error */,
-				B27DF7AF2CECD59B008000C4 /* Endpoint */,
 				14E2F7352B9F6385007CCA2C /* ChatService.swift */,
 			);
 			path = Services;
@@ -245,7 +245,6 @@
 			children = (
 				B27DF7B02CECD5A4008000C4 /* Endpoint.swift */,
 				B27DF7B22CECD60A008000C4 /* UnsplashAPIEndpoint.swift */,
-				B27DF7B42CECD753008000C4 /* NetworkManager.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -263,7 +262,6 @@
 			children = (
 				14374FDC2B98A02600131332 /* AllPhotosService.swift */,
 				B27DF7BA2CECE318008000C4 /* DTO */,
-				B27DF7C22CECE574008000C4 /* PhotosDownloader.swift */,
 			);
 			path = PhotoService;
 			sourceTree = "<group>";
@@ -302,13 +300,13 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
-		B27DF7C72CECF87A008000C4 /* User */ = {
+		B27DF7C72CECF87A008000C4 /* UserService */ = {
 			isa = PBXGroup;
 			children = (
-				B27DF7CB2CECF997008000C4 /* UserService */,
+				B27DF7CC2CECF9A2008000C4 /* UserService.swift */,
 				B27DF7C82CECF87F008000C4 /* UserDTO */,
 			);
-			path = User;
+			path = UserService;
 			sourceTree = "<group>";
 		};
 		B27DF7C82CECF87F008000C4 /* UserDTO */ = {
@@ -319,14 +317,6 @@
 				B27DF7D32CED1857008000C4 /* ProfileImageDTO.swift */,
 			);
 			path = UserDTO;
-			sourceTree = "<group>";
-		};
-		B27DF7CB2CECF997008000C4 /* UserService */ = {
-			isa = PBXGroup;
-			children = (
-				B27DF7CC2CECF9A2008000C4 /* UserService.swift */,
-			);
-			path = UserService;
 			sourceTree = "<group>";
 		};
 		B27DF7D52CED28A8008000C4 /* User */ = {
@@ -386,6 +376,24 @@
 				B27DF7F22CED526F008000C4 /* OSLog+Logger.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B27DF7F42CED53B8008000C4 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				B27DF7B42CECD753008000C4 /* NetworkManager.swift */,
+				B27DF7B62CECD77E008000C4 /* Error */,
+				B27DF7AF2CECD59B008000C4 /* Endpoint */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		B27DF7F52CED53CD008000C4 /* PhotoDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				B27DF7C22CECE574008000C4 /* PhotosDownloader.swift */,
+			);
+			path = PhotoDownloader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
