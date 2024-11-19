@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 final class NetworkManager {
     func performRequest<T: Decodable>(with endpoint: Endpoint) async throws -> T   {
@@ -31,6 +32,7 @@ final class NetworkManager {
             let decoded = try JSONDecoder().decode(T.self, from: data)
             return decoded
         } catch {
+            Logger.appLog.error("error decoding dto: \(error)")
             throw UnsplashError.dataDecodingError
         }
     }

@@ -48,6 +48,7 @@
 		B27DF7EB2CED3F5E008000C4 /* UserLayoutConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7EA2CED3F5E008000C4 /* UserLayoutConstant.swift */; };
 		B27DF7EE2CED3F9F008000C4 /* UIScreen+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7ED2CED3F9F008000C4 /* UIScreen+size.swift */; };
 		B27DF7F12CED4136008000C4 /* FullSizePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7F02CED4136008000C4 /* FullSizePhotoView.swift */; };
+		B27DF7F32CED526F008000C4 /* OSLog+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7F22CED526F008000C4 /* OSLog+Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		B27DF7EA2CED3F5E008000C4 /* UserLayoutConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLayoutConstant.swift; sourceTree = "<group>"; };
 		B27DF7ED2CED3F9F008000C4 /* UIScreen+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+size.swift"; sourceTree = "<group>"; };
 		B27DF7F02CED4136008000C4 /* FullSizePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullSizePhotoView.swift; sourceTree = "<group>"; };
+		B27DF7F22CED526F008000C4 /* OSLog+Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Logger.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				B27DF7ED2CED3F9F008000C4 /* UIScreen+size.swift */,
+				B27DF7F22CED526F008000C4 /* OSLog+Logger.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				14BEC9972C2DC3B5009D8493 /* User.swift in Sources */,
 				B27DF7CD2CECF9A2008000C4 /* UserService.swift in Sources */,
 				14BEC9952C2DC39B009D8493 /* ThreadChatView.swift in Sources */,
+				B27DF7F32CED526F008000C4 /* OSLog+Logger.swift in Sources */,
 				B27DF7DE2CED2CEC008000C4 /* UserLink.swift in Sources */,
 				B27DF7E42CED360F008000C4 /* UserItemView.swift in Sources */,
 				B27DF7C02CECE4AE008000C4 /* FeedItemView.swift in Sources */,
