@@ -14,6 +14,7 @@ struct FeedItemView: View {
 
     // MARK: - State
     @Binding var lastDisplayedPhoto: SharedPhoto?
+    @Binding var selectedUser: UserEntity?
 
     var body: some View {
         VStack {
@@ -44,8 +45,13 @@ struct FeedItemView: View {
             .font(.caption)
             .foregroundStyle(.gray)
         }
-        .overlay(alignment: .topLeading, content: {
-            UserProfilePictureView(user: self.sharedPhoto.author, profileSize: .small)
+        .overlay(alignment: .topLeading,
+                 content: {
+            UserProfilePictureView(
+                user: self.sharedPhoto.author,
+                profileSize: .small,
+                selectedUser: self.$selectedUser
+            )
         })
         .onAppear {
             self.lastDisplayedPhoto = self.sharedPhoto

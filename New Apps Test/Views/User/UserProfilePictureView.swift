@@ -13,17 +13,23 @@ struct UserProfilePictureView: View {
 
     private var userProfileUrl: URL?
 
-    init(user: UserEntity, profileSize: UserProfileViewSize) {
+    @Binding var selectedUser: UserEntity?
+
+    init(user: UserEntity,
+         profileSize: UserProfileViewSize,
+         selectedUser: Binding<UserEntity?>? = nil) {
         self.user = user
         self.profileSize = profileSize
-    
+
+        self._selectedUser = selectedUser ?? Binding.constant(nil)
+
         switch self.profileSize {
         case .small:
-            self.userProfileUrl = URL(string:self.user.profileImage.small)
+            self.userProfileUrl = self.user.profileImage.smallUrl
         case .medium:
-            self.userProfileUrl = URL(string:self.user.profileImage.medium)
+            self.userProfileUrl = self.user.profileImage.mediumUrl
         case .large:
-            self.userProfileUrl = URL(string:self.user.profileImage.large)
+            self.userProfileUrl = self.user.profileImage.largeUrl
         }
     }
 
@@ -39,5 +45,8 @@ struct UserProfilePictureView: View {
                 .stroke(.white, lineWidth: 2)
         )
         .padding(EdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15))
+        .onTapGesture {
+            self.selectedUser = self.user
+        }
     }
 }

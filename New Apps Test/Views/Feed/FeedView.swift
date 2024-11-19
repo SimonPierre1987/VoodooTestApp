@@ -22,9 +22,12 @@ struct FeedView: View {
     // MARK: - States
     @State var sharedPhotos: [SharedPhoto] = []
     @State var lastDisplayedPhoto: SharedPhoto?
+    @State var selectedUser: UserEntity?
+
+    @State private var navPath = NavigationPath()
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: self.$navPath) {
             ScrollView {
                 LazyVStack {
                     self.listHeaderView
@@ -33,7 +36,8 @@ struct FeedView: View {
                         NavigationLink(value: sharedPhoto) {
                             FeedItemView(
                                 sharedPhoto: sharedPhoto,
-                                lastDisplayedPhoto: self.$lastDisplayedPhoto
+                                lastDisplayedPhoto: self.$lastDisplayedPhoto,
+                                selectedUser: self.$selectedUser
                             )
                             .padding(.bottom)
                         }
@@ -43,8 +47,16 @@ struct FeedView: View {
                 .navigationDestination(for: SharedPhoto.self) { sharedPhoto in
                     ThreadChatView(thread: sharedPhoto.chatThread)
                 }
+                .navigationDestination(for: UserEntity.self) { user in
+                    UserProfileView(user: user)
+                }
             }
         }
+        .onChange(of: self.selectedUser, { oldValue, newValue in
+            guard let selectedUser else { return }
+            self.navPath.append(selectedUser)
+            self.selectedUser = nil
+        })
         .onChange(of: self.lastDisplayedPhoto, { oldValue, newValue in
             guard let lastDisplayedPhoto = newValue else { return }
             guard let photoIndex = self.sharedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }

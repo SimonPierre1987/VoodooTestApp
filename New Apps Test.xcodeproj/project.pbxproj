@@ -39,6 +39,9 @@
 		B27DF7D42CED1857008000C4 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7D32CED1857008000C4 /* ProfileImageDTO.swift */; };
 		B27DF7D72CED28B0008000C4 /* UserProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7D62CED28B0008000C4 /* UserProfilePictureView.swift */; };
 		B27DF7DA2CED28CA008000C4 /* UserProfileViewSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7D92CED28CA008000C4 /* UserProfileViewSize.swift */; };
+		B27DF7DE2CED2CEC008000C4 /* UserLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7DD2CED2CEC008000C4 /* UserLink.swift */; };
+		B27DF7E02CED2D38008000C4 /* UserProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7DF2CED2D38008000C4 /* UserProfileImage.swift */; };
+		B27DF7E22CED2ECB008000C4 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7E12CED2ECB008000C4 /* UserProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,9 @@
 		B27DF7D32CED1857008000C4 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		B27DF7D62CED28B0008000C4 /* UserProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePictureView.swift; sourceTree = "<group>"; };
 		B27DF7D92CED28CA008000C4 /* UserProfileViewSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewSize.swift; sourceTree = "<group>"; };
+		B27DF7DD2CED2CEC008000C4 /* UserLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLink.swift; sourceTree = "<group>"; };
+		B27DF7DF2CED2D38008000C4 /* UserProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImage.swift; sourceTree = "<group>"; };
+		B27DF7E12CED2ECB008000C4 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +132,9 @@
 		048E7C6F2C32AC9E00B653F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				14BEC9962C2DC3B5009D8493 /* User.swift */,
+				B27DF7DB2CED2CBC008000C4 /* User */,
 				14BEC9982C2DC3D6009D8493 /* Thread.swift */,
 				14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */,
-				B27DF7CF2CED00AE008000C4 /* UserEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 		B27DF7D52CED28A8008000C4 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				B27DF7E12CED2ECB008000C4 /* UserProfileView.swift */,
 				B27DF7D62CED28B0008000C4 /* UserProfilePictureView.swift */,
 				B27DF7D82CED28C6008000C4 /* Model */,
 			);
@@ -324,6 +330,25 @@
 				B27DF7D92CED28CA008000C4 /* UserProfileViewSize.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B27DF7DB2CED2CBC008000C4 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				B27DF7DC2CED2CE0008000C4 /* Link */,
+				B27DF7CF2CED00AE008000C4 /* UserEntity.swift */,
+				14BEC9962C2DC3B5009D8493 /* User.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		B27DF7DC2CED2CE0008000C4 /* Link */ = {
+			isa = PBXGroup;
+			children = (
+				B27DF7DD2CED2CEC008000C4 /* UserLink.swift */,
+				B27DF7DF2CED2D38008000C4 /* UserProfileImage.swift */,
+			);
+			path = Link;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,10 +487,12 @@
 				B27DF7D02CED00AE008000C4 /* UserEntity.swift in Sources */,
 				B27DF7BC2CECE326008000C4 /* ImageInfoDTO.swift in Sources */,
 				14E2F7362B9F6385007CCA2C /* ChatService.swift in Sources */,
+				B27DF7E02CED2D38008000C4 /* UserProfileImage.swift in Sources */,
 				B27DF7B12CECD5A4008000C4 /* Endpoint.swift in Sources */,
 				14BEC9972C2DC3B5009D8493 /* User.swift in Sources */,
 				B27DF7CD2CECF9A2008000C4 /* UserService.swift in Sources */,
 				14BEC9952C2DC39B009D8493 /* ThreadChatView.swift in Sources */,
+				B27DF7DE2CED2CEC008000C4 /* UserLink.swift in Sources */,
 				B27DF7C02CECE4AE008000C4 /* FeedItemView.swift in Sources */,
 				B27DF7B82CECD7AC008000C4 /* UnsplashError.swift in Sources */,
 				048E7C6C2C2F3C6000B653F4 /* FriendsView.swift in Sources */,
@@ -479,6 +506,7 @@
 				B27DF7DA2CED28CA008000C4 /* UserProfileViewSize.swift in Sources */,
 				B27DF7B52CECD753008000C4 /* NetworkManager.swift in Sources */,
 				B27DF7B32CECD60A008000C4 /* UnsplashAPIEndpoint.swift in Sources */,
+				B27DF7E22CED2ECB008000C4 /* UserProfileView.swift in Sources */,
 				B27DF7D22CED184C008000C4 /* LinkDTO.swift in Sources */,
 				B27DF7D72CED28B0008000C4 /* UserProfilePictureView.swift in Sources */,
 				14374FDD2B98A02600131332 /* UnsplashService.swift in Sources */,

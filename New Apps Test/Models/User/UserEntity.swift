@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct UserEntity {
+struct UserEntity: Equatable {
     let id: String
     let username: String
     let firstName: String
     let lastName: String
     let bio: String?
-    let links: LinkDTO
-    let profileImage: ProfileImageDTO
+    let links: UserLink
+    let profileImage: UserProfileImage
 
     init(userDTO: UserDTO) {
         self.id = userDTO.id
@@ -22,13 +22,19 @@ struct UserEntity {
         self.firstName = userDTO.firstName
         self.lastName = userDTO.lastName
         self.bio = userDTO.bio
-        self.links = userDTO.links
-        self.profileImage = userDTO.profileImage
+        self.links = UserLink(linkDTO: userDTO.links)
+        self.profileImage = UserProfileImage(profileImageDTO: userDTO.profileImage)
     }
 }
 
 extension UserEntity {
     static var currentUser: UserEntity {
         return UserEntity(userDTO: UserDTO.currentUser)
+    }
+}
+
+extension UserEntity: Hashable {
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(self.id)
     }
 }
