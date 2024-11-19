@@ -111,7 +111,13 @@ private extension FeedView {
 
             NavigationLink {
                 SharePhotoView { image in
-                    sharedPhotos.append(SharedPhoto(author: UserEntity.currentUser, contentSource: .image(image), chatThread: Thread()))
+                    let newCurrentUserPhoto = SharedPhoto(
+                        author: UserEntity.currentUser,
+                        contentSource: .image(image),
+                        chatThread: Thread()
+                    )
+                    self.sharedPhotos.insert(newCurrentUserPhoto, at: 0)
+                    // TODO: Post the image.
                 }
             } label: {
                 Image(systemName: "plus")
