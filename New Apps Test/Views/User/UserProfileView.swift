@@ -8,9 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum UserLayoutConstant {
-    static let margin: CGFloat = 15
-}
 
 struct UserProfileView: View {
     let user: UserEntity
@@ -20,7 +17,15 @@ struct UserProfileView: View {
 
     // MARK: State
     @State var sharedPhotos: [SharedPhoto] = []
+    @State var userPhotosAlreadyFetched = false
+    @State var photoToDisplayFullScreen: Image?
 
+    // MARK: - Layout
+    let column = [
+        GridItem(.fixed(UserLayoutConstant.fixedUserImageSize)),
+        GridItem(.fixed(UserLayoutConstant.fixedUserImageSize)),
+        GridItem(.fixed(UserLayoutConstant.fixedUserImageSize))
+    ]
 
     var body: some View {
         VStack(spacing: 0) {
@@ -28,64 +33,47 @@ struct UserProfileView: View {
             UserNameView(firstName: self.user.firstName,
                          lastName: self.user.lastName)
             UserBioView(bio: self.user.bio)
-        }
-        ScrollView {
-            LazyVStack {
-                ForEach(self.sharedPhotos, id: \.self) { sharedPhoto in
-                    NavigationLink(value: sharedPhoto) {
-                        UserItemView(sharedPhoto: sharedPhoto)
-                            .padding(.bottom)
+            ScrollView {
+                LazyVGrid(columns: self.column, spacing: 0) {
+                    ForEach(self.sharedPhotos, id: \.self) { sharedPhoto in
+                        UserItemView(
+                            sharedPhoto: sharedPhoto,
+                            photoToDisplayFullScreen: self.$photoToDisplayFullScreen)
+                        .padding(.bottom)
                     }
                 }
+                .padding()
             }
-            .padding()
-        }
-
-        .onAppear(perform: {
-            Task {
-                do {
-                    let userPhotos = try await self.userService.getPhotos(for: self.user.username )
-                    self.sharedPhotos = userPhotos.map { SharedPhoto(imageInfo: $0, chatThread: Thread.mock )}
-                } catch {
-                    fatalError()
+            .overlay(alignment: .center) {
+                if let photoToDisplayFullScreen = self.photoToDisplayFullScreen {
+                    FullSizePhotoView(
+                        image: photoToDisplayFullScreen,
+                        photoToDisplayFullScreen: self.$photoToDisplayFullScreen)
+                    .transition(.asymmetric(insertion: .push(from: .bottom), removal: .push(from: .top)))
                 }
-            }
-        })
 
+            }
+        }
+        .task {
+            await self.fetchUserPhotosIfNeeded()
+        }
+    }
+}
+
+private extension UserProfileView {
+    private func fetchUserPhotosIfNeeded() async {
+        if self.userPhotosAlreadyFetched { return }
+        do {
+            let userPhotos = try await self.userService.getPhotos(for: self.user.username )
+            self.sharedPhotos = userPhotos
+                .map { SharedPhoto(imageInfo: $0, chatThread: Thread.mock )}
+            self.userPhotosAlreadyFetched = true
+        } catch {
+            // Nothing to do
+        }
     }
 }
 
 #Preview {
     UserProfileView(user: UserEntity.mockOne)
-}
-
-struct UserBioView: View {
-    let bio: String?
-    var body: some View {
-        Text(self.bio ?? "")
-            .font(.caption2)
-            .opacity(self.bio == nil ? 0 : 1)
-            .padding(
-                EdgeInsets(top: 0, leading: UserLayoutConstant.margin,
-                           bottom: 0,
-                           trailing: UserLayoutConstant.margin
-                          )
-            )
-    }
-}
-
-struct UserNameView: View {
-    let firstName: String
-    let lastName: String
-
-    var body: some View {
-        Text(self.firstName + " " + self.lastName)
-            .font(.title)
-            .padding(
-            EdgeInsets(top: 0, leading: UserLayoutConstant.margin,
-                       bottom: 0,
-                       trailing: UserLayoutConstant.margin
-                      )
-        )
-    }
 }
