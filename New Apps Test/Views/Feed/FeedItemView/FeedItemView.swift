@@ -44,6 +44,9 @@ struct FeedItemView: View {
             .font(.caption)
             .foregroundStyle(.gray)
         }
+        .overlay(alignment: .topLeading, content: {
+            UserProfilePictureView(user: self.sharedPhoto.author, profileSize: .small)
+        })
         .onAppear {
             self.lastDisplayedPhoto = self.sharedPhoto
         }
