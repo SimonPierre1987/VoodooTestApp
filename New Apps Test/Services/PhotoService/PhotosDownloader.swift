@@ -32,7 +32,7 @@ final actor PhotosDownloader: PhotosDownloaderProtocol {
 
     // MARK: - PhotosDownloaderProtocol
     func photos(for page: Page) async -> [ImageInfo] {
-        if let cachedPhotos = cache[page] {
+        if let cachedPhotos = self.cache[page] {
             switch cachedPhotos {
             case .inProgress(let task):
                 return await task.value
@@ -42,7 +42,7 @@ final actor PhotosDownloader: PhotosDownloaderProtocol {
         }
 
         let task = Task {
-            return await photosService.getPhotos(for: page)
+            return await self.photosService.getPhotos(for: page)
         }
 
         self.cache[page] = .inProgress(task)
