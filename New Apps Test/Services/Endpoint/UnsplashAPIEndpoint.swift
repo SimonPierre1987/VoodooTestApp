@@ -11,6 +11,7 @@ enum UnsplashAPIEndpoint {
     case photo(page: Int, countPerPage: Int)
     case user(userName: String)
     case me
+    case userPhotos(username: String)
 }
 
 extension UnsplashAPIEndpoint: Endpoint {
@@ -18,7 +19,7 @@ extension UnsplashAPIEndpoint: Endpoint {
 
     var baseUrlSting: String {
         switch self {
-        case .photo, .user, .me:
+        case .photo, .user, .me, .userPhotos:
             return "https://api.unsplash.com/"
         }
     }
@@ -31,6 +32,8 @@ extension UnsplashAPIEndpoint: Endpoint {
             return "/users/\(userName)"
         case .me:
             return "/me"
+        case .userPhotos(let username):
+            return "/users/\(username)/photos"
         }
     }
 
@@ -41,6 +44,8 @@ extension UnsplashAPIEndpoint: Endpoint {
         case .user:
             return HTTPMethod.get
         case .me:
+            return HTTPMethod.get
+        case .userPhotos:
             return HTTPMethod.get
         }
     }
@@ -56,6 +61,8 @@ extension UnsplashAPIEndpoint: Endpoint {
         case .user:
             return [:]
         case .me:
+            return [:]
+        case .userPhotos:
             return [:]
         }
     }

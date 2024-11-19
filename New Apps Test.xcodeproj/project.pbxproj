@@ -42,6 +42,7 @@
 		B27DF7DE2CED2CEC008000C4 /* UserLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7DD2CED2CEC008000C4 /* UserLink.swift */; };
 		B27DF7E02CED2D38008000C4 /* UserProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7DF2CED2D38008000C4 /* UserProfileImage.swift */; };
 		B27DF7E22CED2ECB008000C4 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7E12CED2ECB008000C4 /* UserProfileView.swift */; };
+		B27DF7E42CED360F008000C4 /* UserItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7E32CED360F008000C4 /* UserItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		B27DF7DD2CED2CEC008000C4 /* UserLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLink.swift; sourceTree = "<group>"; };
 		B27DF7DF2CED2D38008000C4 /* UserProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImage.swift; sourceTree = "<group>"; };
 		B27DF7E12CED2ECB008000C4 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		B27DF7E32CED360F008000C4 /* UserItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				B27DF7E12CED2ECB008000C4 /* UserProfileView.swift */,
+				B27DF7E32CED360F008000C4 /* UserItemView.swift */,
 				B27DF7D62CED28B0008000C4 /* UserProfilePictureView.swift */,
 				B27DF7D82CED28C6008000C4 /* Model */,
 			);
@@ -493,6 +496,7 @@
 				B27DF7CD2CECF9A2008000C4 /* UserService.swift in Sources */,
 				14BEC9952C2DC39B009D8493 /* ThreadChatView.swift in Sources */,
 				B27DF7DE2CED2CEC008000C4 /* UserLink.swift in Sources */,
+				B27DF7E42CED360F008000C4 /* UserItemView.swift in Sources */,
 				B27DF7C02CECE4AE008000C4 /* FeedItemView.swift in Sources */,
 				B27DF7B82CECD7AC008000C4 /* UnsplashError.swift in Sources */,
 				048E7C6C2C2F3C6000B653F4 /* FriendsView.swift in Sources */,
