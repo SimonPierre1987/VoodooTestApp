@@ -86,10 +86,7 @@ private extension FeedView {
 // MARK: - Helpers
 private extension FeedView {
     private func toSharedPhotos(photos: [ImageInfo]) -> [SharedPhoto] {
-        return photos
-            .map { $0.urls.regular }
-            .compactMap { URL(string: $0) }
-            .map { SharedPhoto(author: User.random, contentSource: .url($0), chatThread: Thread.mock) }
+        return photos.map { SharedPhoto(imageInfo: $0, chatThread: Thread.mock) }
     }
 }
 
@@ -102,7 +99,7 @@ private extension FeedView {
 
             NavigationLink {
                 SharePhotoView { image in
-                    sharedPhotos.append(SharedPhoto(author: User.mockUser1, contentSource: .image(image), chatThread: Thread()))
+                    sharedPhotos.append(SharedPhoto(author: UserEntity.currentUser, contentSource: .image(image), chatThread: Thread()))
                 }
             } label: {
                 Image(systemName: "plus")

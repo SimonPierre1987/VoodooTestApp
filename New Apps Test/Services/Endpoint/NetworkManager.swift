@@ -17,18 +17,14 @@ final class NetworkManager {
     }
 
   private func performUrlRequest<T: Decodable>(_ request: URLRequest) async throws -> T {
-        do {
-            let result = try await URLSession.shared.data(for: request)
+      let result = try await URLSession.shared.data(for: request)
 
-            guard let urlResponse = result.1 as? HTTPURLResponse, 200...299 ~= urlResponse.statusCode else {
-                throw UnsplashError.serverError(result.1)
-            }
+      guard let urlResponse = result.1 as? HTTPURLResponse, 200...299 ~= urlResponse.statusCode else {
+          throw UnsplashError.serverError(result.1)
+      }
 
-            return try self.decodedData(result.0)
-        } catch {
-            throw UnsplashError.clientError(error)
-        }
-    }
+      return try self.decodedData(result.0)
+  }
 
     private func decodedData<T: Decodable>(_ data: Data) throws -> T {
         do {

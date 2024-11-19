@@ -26,12 +26,11 @@ protocol Endpoint {
 
 extension Endpoint {
     func createURLRequest() -> URLRequest? {
-
-        guard var components = URLComponents(string: baseUrlSting) else {
+        guard var components = URLComponents(string: self.baseUrlSting) else {
             return nil
         }
 
-        let queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value)}
+        let queryItems = self.parameters.map { URLQueryItem(name: $0.key, value: $0.value)}
         components.path = path
         components.queryItems = queryItems
 
@@ -40,8 +39,10 @@ extension Endpoint {
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = httpMethod.rawValue
+        request.httpMethod = self.httpMethod.rawValue
 
+        request.setValue("Client-ID 8j7cdQS9HM1tfIomk_dUwqrIZ7wnymEECz6xk6OPP6k", forHTTPHeaderField: "Authorization")
+        request.setValue("v1", forHTTPHeaderField: "Accept-Version")
         return request
     }
 }

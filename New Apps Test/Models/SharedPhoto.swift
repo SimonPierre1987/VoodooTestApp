@@ -18,7 +18,7 @@ import SwiftUI
 
 struct SharedPhoto: Identifiable {
     let id = UUID() // TODO: use the backend id
-    let author: User
+    let author: UserEntity
     let contentSource: ContentSource
     let chatThread: Thread
     
@@ -26,6 +26,16 @@ struct SharedPhoto: Identifiable {
         case url(URL)
         case image(Image)
         case embeddedAsset(String)
+    }
+}
+
+extension SharedPhoto {
+    init(imageInfo: ImageInfo,
+         chatThread: Thread) {
+        let url = URL(string: imageInfo.urls.regular)!
+        self.contentSource = .url(url)
+        self.chatThread = chatThread
+        self.author = UserEntity(userDTO: imageInfo.user)
     }
 }
 

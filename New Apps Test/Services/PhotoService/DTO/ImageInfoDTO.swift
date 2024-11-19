@@ -10,6 +10,7 @@ import Foundation
 struct ImageInfo: Codable {
     let id: String
     let urls: ImageUrl
+    let user: UserDTO
 }
 
 struct ImageUrl: Codable {

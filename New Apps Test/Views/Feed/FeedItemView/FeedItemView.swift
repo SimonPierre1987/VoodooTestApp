@@ -37,7 +37,7 @@ struct FeedItemView: View {
             }
 
             HStack {
-                Text("Photo shared by " + sharedPhoto.author.name)
+                Text("Photo shared by " + sharedPhoto.author.firstName)
                 Spacer()
                 Label("\(sharedPhoto.chatThread.messages.count) messages", systemImage: "message")
             }
