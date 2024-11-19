@@ -15,12 +15,11 @@
 
 import Foundation
 
-protocol UnsplashServiceProtocol {
+protocol AllPhotosServiceProtocol {
     func getPhotos(for page: Int) async -> [ImageDTO]
 }
 
-final class UnsplashService: UnsplashServiceProtocol {
-    private let appId = "575727"
+final class AllPhotosService: AllPhotosServiceProtocol {
     private let networkManager = NetworkManager()
 
     func getPhotos(for page: Int) async -> [ImageDTO] {

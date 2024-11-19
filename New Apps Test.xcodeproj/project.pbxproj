@@ -18,7 +18,7 @@
 		14374FC42B989FD700131332 /* New_Apps_TestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14374FC32B989FD700131332 /* New_Apps_TestTests.swift */; };
 		14374FCE2B989FD700131332 /* New_Apps_TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14374FCD2B989FD700131332 /* New_Apps_TestUITests.swift */; };
 		14374FD02B989FD700131332 /* New_Apps_TestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14374FCF2B989FD700131332 /* New_Apps_TestUITestsLaunchTests.swift */; };
-		14374FDD2B98A02600131332 /* UnsplashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14374FDC2B98A02600131332 /* UnsplashService.swift */; };
+		14374FDD2B98A02600131332 /* AllPhotosService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14374FDC2B98A02600131332 /* AllPhotosService.swift */; };
 		14BEC9952C2DC39B009D8493 /* ThreadChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC9942C2DC39B009D8493 /* ThreadChatView.swift */; };
 		14BEC9972C2DC3B5009D8493 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC9962C2DC3B5009D8493 /* User.swift */; };
 		14BEC9992C2DC3D6009D8493 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC9982C2DC3D6009D8493 /* Thread.swift */; };
@@ -84,7 +84,7 @@
 		14374FC92B989FD700131332 /* New Apps TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "New Apps TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14374FCD2B989FD700131332 /* New_Apps_TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Apps_TestUITests.swift; sourceTree = "<group>"; };
 		14374FCF2B989FD700131332 /* New_Apps_TestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Apps_TestUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		14374FDC2B98A02600131332 /* UnsplashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashService.swift; sourceTree = "<group>"; };
+		14374FDC2B98A02600131332 /* AllPhotosService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPhotosService.swift; sourceTree = "<group>"; };
 		14BEC9942C2DC39B009D8493 /* ThreadChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadChatView.swift; sourceTree = "<group>"; };
 		14BEC9962C2DC3B5009D8493 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14BEC9982C2DC3D6009D8493 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 		B27DF7B92CECE303008000C4 /* PhotoService */ = {
 			isa = PBXGroup;
 			children = (
-				14374FDC2B98A02600131332 /* UnsplashService.swift */,
+				14374FDC2B98A02600131332 /* AllPhotosService.swift */,
 				B27DF7BA2CECE318008000C4 /* DTO */,
 				B27DF7C22CECE574008000C4 /* PhotosDownloader.swift */,
 			);
@@ -553,7 +553,7 @@
 				B27DF7E82CED39C3008000C4 /* UserBioView.swift in Sources */,
 				B27DF7D22CED184C008000C4 /* LinkDTO.swift in Sources */,
 				B27DF7D72CED28B0008000C4 /* UserProfilePictureView.swift in Sources */,
-				14374FDD2B98A02600131332 /* UnsplashService.swift in Sources */,
+				14374FDD2B98A02600131332 /* AllPhotosService.swift in Sources */,
 				B27DF7C62CECE93C008000C4 /* FeedConstant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

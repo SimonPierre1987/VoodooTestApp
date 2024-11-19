@@ -15,7 +15,7 @@ protocol PhotosDownloaderProtocol {
 
 final actor PhotosDownloader: PhotosDownloaderProtocol {
     // MARK: - Services
-    private let photosService: any UnsplashServiceProtocol
+    private let photosService: any AllPhotosServiceProtocol
 
     // MARK: - Caching
     private enum CacheEntry {
@@ -26,7 +26,7 @@ final actor PhotosDownloader: PhotosDownloaderProtocol {
     private var cache: [Page: CacheEntry] = [:]
 
     // MARK: - Life Cycle
-    init(photosService: any UnsplashServiceProtocol = UnsplashService()) {
+    init(photosService: any AllPhotosServiceProtocol = AllPhotosService()) {
         self.photosService = photosService
     }
 
