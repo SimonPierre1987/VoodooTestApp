@@ -45,14 +45,13 @@ struct FeedItemView: View {
             .font(.caption)
             .foregroundStyle(.gray)
         }
-        .overlay(alignment: .topLeading,
-                 content: {
+        .overlay(alignment: .topLeading) {
             UserProfilePictureView(
                 user: self.sharedPhoto.author,
                 profileSize: .small,
                 selectedUser: self.$selectedUser
             )
-        })
+        }
         .onAppear {
             self.lastDisplayedPhoto = self.sharedPhoto
         }

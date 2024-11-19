@@ -27,6 +27,7 @@ struct UserProfileView: View {
         GridItem(.fixed(UserLayoutConstant.fixedUserImageSize))
     ]
 
+    // MARK: - Life cycle
     var body: some View {
         VStack(spacing: 0) {
             UserProfilePictureView(user: self.user, profileSize: .large)
@@ -51,7 +52,6 @@ struct UserProfileView: View {
                         photoToDisplayFullScreen: self.$photoToDisplayFullScreen)
                     .transition(.asymmetric(insertion: .push(from: .bottom), removal: .push(from: .top)))
                 }
-
             }
         }
         .task {

@@ -63,9 +63,7 @@ struct FeedView: View {
 
             Task { await self.fetchNextPage(for: photoIndex) }
         })
-        .task {
-            await self.fetch(nextPage: 1)
-        }
+        .task { await self.fetch(nextPage: 1) }
     }
 }
 
@@ -78,7 +76,7 @@ private extension FeedView {
 
     private func fetch(nextPage: Page) async {
         let newPhotos = await self.photoDownloader.photos(for: nextPage)
-        let newSharedPhotos = self.toSharedPhotos(photos: newPhotos)
+        let newSharedPhotos = newPhotos.toSharedPhoto()
         self.sharedPhotos.append(contentsOf: newSharedPhotos)
     }
 
@@ -92,13 +90,6 @@ private extension FeedView {
 
     private func shouldFetchNextPage(for photoIndex: Int) -> Bool {
         return photoIndex == self.sharedPhotos.count - FeedConstant.nextPhotoThreshold
-    }
-}
-
-// MARK: - Helpers
-private extension FeedView {
-    private func toSharedPhotos(photos: [ImageDTO]) -> [SharedPhoto] {
-        return photos.map { SharedPhoto(imageInfo: $0, chatThread: Thread.mock) }
     }
 }
 
