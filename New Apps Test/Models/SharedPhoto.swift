@@ -30,7 +30,7 @@ struct SharedPhoto: Identifiable {
 }
 
 extension SharedPhoto {
-    init(imageInfo: ImageInfo,
+    init(imageInfo: ImageDTO,
          chatThread: Thread) {
         let url = URL(string: imageInfo.urls.regular)!
         self.contentSource = .url(url)

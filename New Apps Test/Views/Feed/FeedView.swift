@@ -97,7 +97,7 @@ private extension FeedView {
 
 // MARK: - Helpers
 private extension FeedView {
-    private func toSharedPhotos(photos: [ImageInfo]) -> [SharedPhoto] {
+    private func toSharedPhotos(photos: [ImageDTO]) -> [SharedPhoto] {
         return photos.map { SharedPhoto(imageInfo: $0, chatThread: Thread.mock) }
     }
 }

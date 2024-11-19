@@ -1,5 +1,5 @@
 //
-//  ImageInfo.swift
+//  ImageDTO.swift
 //  New Apps Test
 //
 //  Created by Pierre Simon on 19/11/2024.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct ImageInfo: Codable {
+struct ImageDTO: Codable {
     let id: String
-    let urls: ImageUrl
+    let urls: ImageUrlDTO
     let user: UserDTO
 }
 
-struct ImageUrl: Codable {
+struct ImageUrlDTO: Codable {
     let regular: String
 }

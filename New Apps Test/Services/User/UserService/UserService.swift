@@ -25,7 +25,7 @@ final class UserService: UserServiceProtocl {
         return try await self.networkManager.performRequest(with: endpoint)
     }
 
-    func getPhotos(for userName: String) async throws -> [ImageInfo] {
+    func getPhotos(for userName: String) async throws -> [ImageDTO] {
         let endpoint = UnsplashAPIEndpoint.userPhotos(username: userName)
         return try await self.networkManager.performRequest(with: endpoint)
     }

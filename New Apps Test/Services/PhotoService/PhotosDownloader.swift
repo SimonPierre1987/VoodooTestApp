@@ -10,7 +10,7 @@ import Foundation
 typealias Page = Int
 
 protocol PhotosDownloaderProtocol {
-    func photos(for page: Page) async throws -> [ImageInfo]
+    func photos(for page: Page) async throws -> [ImageDTO]
 }
 
 final actor PhotosDownloader: PhotosDownloaderProtocol {
@@ -19,8 +19,8 @@ final actor PhotosDownloader: PhotosDownloaderProtocol {
 
     // MARK: - Caching
     private enum CacheEntry {
-        case inProgress(Task<[ImageInfo], Never>)
-        case ready([ImageInfo])
+        case inProgress(Task<[ImageDTO], Never>)
+        case ready([ImageDTO])
     }
 
     private var cache: [Page: CacheEntry] = [:]
@@ -31,7 +31,7 @@ final actor PhotosDownloader: PhotosDownloaderProtocol {
     }
 
     // MARK: - PhotosDownloaderProtocol
-    func photos(for page: Page) async -> [ImageInfo] {
+    func photos(for page: Page) async -> [ImageDTO] {
         if let cachedPhotos = self.cache[page] {
             switch cachedPhotos {
             case .inProgress(let task):
