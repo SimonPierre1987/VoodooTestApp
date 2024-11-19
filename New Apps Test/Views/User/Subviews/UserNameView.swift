@@ -9,10 +9,10 @@ import SwiftUI
 
 struct UserNameView: View {
     let firstName: String
-    let lastName: String
+    let lastName: String?
 
     var body: some View {
-        Text(self.firstName + " " + self.lastName)
+        Text(self.firstName + " " + (self.lastName ?? ""))
             .font(.title)
             .padding(
                 EdgeInsets(top: 0, 
