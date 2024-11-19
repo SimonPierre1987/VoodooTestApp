@@ -24,6 +24,10 @@
 		14BEC9992C2DC3D6009D8493 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC9982C2DC3D6009D8493 /* Thread.swift */; };
 		14BEC99B2C2DC3E1009D8493 /* SharedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */; };
 		14E2F7362B9F6385007CCA2C /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2F7352B9F6385007CCA2C /* ChatService.swift */; };
+		B27DF7B12CECD5A4008000C4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B02CECD5A4008000C4 /* Endpoint.swift */; };
+		B27DF7B32CECD60A008000C4 /* UnsplashAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B22CECD60A008000C4 /* UnsplashAPIEndpoint.swift */; };
+		B27DF7B52CECD753008000C4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B42CECD753008000C4 /* NetworkManager.swift */; };
+		B27DF7B82CECD7AC008000C4 /* UnsplashError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B72CECD7AC008000C4 /* UnsplashError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +70,10 @@
 		14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPhoto.swift; sourceTree = "<group>"; };
 		14C4BCC52B98A97F007B818F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14E2F7352B9F6385007CCA2C /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		B27DF7B02CECD5A4008000C4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		B27DF7B22CECD60A008000C4 /* UnsplashAPIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIEndpoint.swift; sourceTree = "<group>"; };
+		B27DF7B42CECD753008000C4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B27DF7B72CECD7AC008000C4 /* UnsplashError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +114,8 @@
 		048E7C702C32ACA700B653F4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B27DF7B62CECD77E008000C4 /* Error */,
+				B27DF7AF2CECD59B008000C4 /* Endpoint */,
 				14374FDC2B98A02600131332 /* UnsplashService.swift */,
 				14E2F7352B9F6385007CCA2C /* ChatService.swift */,
 			);
@@ -183,6 +193,24 @@
 				14374FCF2B989FD700131332 /* New_Apps_TestUITestsLaunchTests.swift */,
 			);
 			path = "New Apps TestUITests";
+			sourceTree = "<group>";
+		};
+		B27DF7AF2CECD59B008000C4 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				B27DF7B02CECD5A4008000C4 /* Endpoint.swift */,
+				B27DF7B22CECD60A008000C4 /* UnsplashAPIEndpoint.swift */,
+				B27DF7B42CECD753008000C4 /* NetworkManager.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		B27DF7B62CECD77E008000C4 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				B27DF7B72CECD7AC008000C4 /* UnsplashError.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,14 +346,18 @@
 				14BEC99B2C2DC3E1009D8493 /* SharedPhoto.swift in Sources */,
 				14374FB42B989FD500131332 /* FeedView.swift in Sources */,
 				14E2F7362B9F6385007CCA2C /* ChatService.swift in Sources */,
+				B27DF7B12CECD5A4008000C4 /* Endpoint.swift in Sources */,
 				14BEC9972C2DC3B5009D8493 /* User.swift in Sources */,
 				14BEC9952C2DC39B009D8493 /* ThreadChatView.swift in Sources */,
+				B27DF7B82CECD7AC008000C4 /* UnsplashError.swift in Sources */,
 				048E7C6C2C2F3C6000B653F4 /* FriendsView.swift in Sources */,
 				048E7C682C2F08EA00B653F4 /* SettingsView.swift in Sources */,
 				14374FB22B989FD500131332 /* New_Apps_TestApp.swift in Sources */,
 				048E7C6E2C2F3CE900B653F4 /* SharePhotoView.swift in Sources */,
 				14BEC9992C2DC3D6009D8493 /* Thread.swift in Sources */,
 				048E7C662C2F08B500B653F4 /* RootView.swift in Sources */,
+				B27DF7B52CECD753008000C4 /* NetworkManager.swift in Sources */,
+				B27DF7B32CECD60A008000C4 /* UnsplashAPIEndpoint.swift in Sources */,
 				14374FDD2B98A02600131332 /* UnsplashService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
