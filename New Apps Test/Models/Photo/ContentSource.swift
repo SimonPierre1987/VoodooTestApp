@@ -14,13 +14,37 @@ enum ContentSource {
 }
 
 extension ContentSource {
+    var imageUrl: URL? {
+        switch self {
+        case .url(let url):
+            return url
+        case .image:
+            return nil
+        case .embeddedAsset:
+            return nil
+        }
+    }
+
+    var image: Image? {
+        switch self {
+        case .url(let uRL):
+            return nil
+        case .image(let image):
+            return image
+        case .embeddedAsset(let string):
+            return Image(string)
+        }
+    }
+}
+
+extension ContentSource {
     static func toImageUrlDTO(contentSource: ContentSource) -> ImageUrlDTO {
         switch contentSource {
-        case .url(let uRL):
-            return ImageUrlDTO(regular: uRL.absoluteString)
-        case .image(let image):
+        case .url(let url):
+            return ImageUrlDTO(regular: url.absoluteString)
+        case .image:
             return ImageUrlDTO(regular: "")
-        case .embeddedAsset(let string):
+        case .embeddedAsset:
             return ImageUrlDTO(regular: "")
         }
     }
