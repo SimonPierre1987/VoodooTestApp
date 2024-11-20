@@ -15,7 +15,7 @@ struct UserProfileView: View {
     private let userService: UserService = UserService()
 
     // MARK: State
-    @State var sharedPhotos: [SharedPhoto] = []
+    @State var usersPhotos: [SharedPhoto] = []
     @State var userPhotosAlreadyFetched = false
     @State var photoToDisplayFullScreen: Image?
 
@@ -36,9 +36,9 @@ struct UserProfileView: View {
             Spacer(minLength: UserLayoutConstant.margin)
             ScrollView {
                 LazyVGrid(columns: self.column, spacing: 0) {
-                    ForEach(self.sharedPhotos, id: \.self) { sharedPhoto in
+                    ForEach(self.usersPhotos, id: \.self) { userPhoto in
                         UserItemView(
-                            sharedPhoto: sharedPhoto,
+                            userPhoto: userPhoto,
                             photoToDisplayFullScreen: self.$photoToDisplayFullScreen)
                         .padding(.bottom)
                     }
@@ -65,7 +65,7 @@ private extension UserProfileView {
         if self.userPhotosAlreadyFetched { return }
         do {
             let userPhotos = try await self.userService.getPhotos(for: self.user.username )
-            self.sharedPhotos = userPhotos
+            self.usersPhotos = userPhotos
                 .map { SharedPhoto(imageDTO: $0, chatThread: Thread.mock )}
             self.userPhotosAlreadyFetched = true
         } catch {

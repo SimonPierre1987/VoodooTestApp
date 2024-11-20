@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FeedItemView: View {
 
-    let sharedPhoto: SharedPhoto
+    let feedPhoto: SharedPhoto
 
     // MARK: - State
     @Binding var lastDisplayedPhoto: SharedPhoto?
@@ -18,7 +18,7 @@ struct FeedItemView: View {
 
     var body: some View {
         VStack {
-            switch sharedPhoto.contentSource {
+            switch self.feedPhoto.contentSource {
             case .url(let url):
                 AsyncImage(url: url)
                     .frame(width: 350, height: 300)
@@ -38,9 +38,9 @@ struct FeedItemView: View {
             }
 
             HStack {
-                Label("\(String(self.sharedPhoto.likes)) likes", systemImage:  self.sharedPhoto.isLikedByUser ? "heart.fill" : "heart")
+                Label("\(String(self.feedPhoto.likes)) likes", systemImage:  self.feedPhoto.isLikedByUser ? "heart.fill" : "heart")
                 Spacer()
-                Label("\(sharedPhoto.chatThread.messages.count) messages", systemImage: "message")
+                Label("\(self.feedPhoto.chatThread.messages.count) messages", systemImage: "message")
             }
             .font(.caption)
             .foregroundStyle(.gray)
@@ -48,13 +48,14 @@ struct FeedItemView: View {
         .padding(.horizontal)
         .overlay(alignment: .topLeading) {
             UserProfilePictureView(
-                user: self.sharedPhoto.author,
+                user: self.feedPhoto.author,
                 profileSize: .small,
                 selectedUser: self.$selectedUser
             )
         }
         .onAppear {
-            self.lastDisplayedPhoto = self.sharedPhoto
+            self.lastDisplayedPhoto = self.feedPhoto
         }
     }
 }
+

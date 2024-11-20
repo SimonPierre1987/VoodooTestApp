@@ -20,22 +20,22 @@ struct FeedView: View {
     private let photoDownloader = PhotosDownloader()
 
     // MARK: - States
-    @State var sharedPhotos: [SharedPhoto] = []
+    @State var allFeedPhotos: [SharedPhoto] = []
     @State var lastDisplayedPhoto: SharedPhoto?
     @State var selectedUser: UserEntity?
 
-    @State private var navPath = NavigationPath()
+    @State private var navigationPath = NavigationPath()
 
     var body: some View {
-        NavigationStack(path: self.$navPath) {
+        NavigationStack(path: self.$navigationPath) {
             ScrollView {
                 LazyVStack {
                     self.listHeaderView
 
-                    ForEach(sharedPhotos, id: \.self) { sharedPhoto in
-                        NavigationLink(value: sharedPhoto) {
+                    ForEach(allFeedPhotos, id: \.self) { feedPhoto in
+                        NavigationLink(value: feedPhoto) {
                             FeedItemView(
-                                sharedPhoto: sharedPhoto,
+                                feedPhoto: feedPhoto,
                                 lastDisplayedPhoto: self.$lastDisplayedPhoto,
                                 selectedUser: self.$selectedUser
                             )
@@ -44,8 +44,8 @@ struct FeedView: View {
                     }
                 }
                 .padding()
-                .navigationDestination(for: SharedPhoto.self) { sharedPhoto in
-                    ThreadChatView(thread: sharedPhoto.chatThread)
+                .navigationDestination(for: SharedPhoto.self) { feedPhoto in
+                    ThreadChatView(thread: feedPhoto.chatThread)
                 }
                 .navigationDestination(for: UserEntity.self) { user in
                     UserProfileView(user: user)
@@ -54,12 +54,12 @@ struct FeedView: View {
         }
         .onChange(of: self.selectedUser, { oldValue, newValue in
             guard let selectedUser else { return }
-            self.navPath.append(selectedUser)
+            self.navigationPath.append(selectedUser)
             self.selectedUser = nil
         })
         .onChange(of: self.lastDisplayedPhoto, { oldValue, newValue in
             guard let lastDisplayedPhoto = newValue else { return }
-            guard let photoIndex = self.sharedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
+            guard let photoIndex = self.allFeedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
 
             Task { await self.fetchNextPage(for: photoIndex) }
         })
@@ -76,8 +76,8 @@ private extension FeedView {
 
     private func fetch(nextPage: Page) async {
         let newPhotos = await self.photoDownloader.photos(for: nextPage)
-        let newSharedPhotos = newPhotos.toSharedPhoto()
-        self.sharedPhotos.append(contentsOf: newSharedPhotos)
+        let newFeedPhotos = newPhotos.toSharedPhoto()
+        self.allFeedPhotos.append(contentsOf: newFeedPhotos)
     }
 
     private func nextPageToLoad(for photoIndex: Int) -> Page? {
@@ -89,7 +89,7 @@ private extension FeedView {
     }
 
     private func shouldFetchNextPage(for photoIndex: Int) -> Bool {
-        return photoIndex == self.sharedPhotos.count - FeedConstant.nextPhotoThreshold
+        return photoIndex == self.allFeedPhotos.count - FeedConstant.nextPhotoThreshold
     }
 }
 
@@ -111,7 +111,7 @@ private extension FeedView {
                         isLikedByUser: false,
                         likes: 0
                     )
-                    self.sharedPhotos.insert(newCurrentUserPhoto, at: 0)
+                    self.allFeedPhotos.insert(newCurrentUserPhoto, at: 0)
                     // TODO: Post the image.
                 }
             } label: {

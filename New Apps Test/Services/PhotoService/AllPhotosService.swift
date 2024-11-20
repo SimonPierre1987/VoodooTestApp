@@ -40,7 +40,7 @@ final class AllPhotosService: AllPhotosServiceProtocol {
             // DISCLAIMER: The endpoint will not work as I dont have an account for this client_id and I don''t succeed to set up an account.
             // If I was successful, the documentation is asking to set up the "write_likes" scope for the account in order to use this service.
             // Meanwhile i will fake a positive answer from the back-end.
-            // The sharedPhoto will be updated accordingly locally.
+            // The photo will be updated accordingly locally.
             // Only the like/dislike will not be visible each time we fetch this photo again.
             Logger.appLog.error("Please read the disclaimers of AllPhotosService")
             return SharedPhoto.toImageDTO(sharedPhoto: photo, isLikedByUser: true)
@@ -55,7 +55,7 @@ final class AllPhotosService: AllPhotosServiceProtocol {
             // DISCLAIMER: The endpoint will not work as I dont have an account for this client_id and I don''t succeed to set up an account.
             // If I was successful, the documentation is asking to set up the "write_likes" scope for the account in order to use this service.
             // Meanwhile i will fake a positive answer from the back-end.
-            // The sharedPhoto will be updated accordingly locally.
+            // The photo will be updated accordingly locally.
             // Only the like/dislike will not be visible each time we fetch this photo again.
             Logger.appLog.error("Please read the disclaimers of AllPhotosService")
             return SharedPhoto.toImageDTO(sharedPhoto: photo, isLikedByUser: false)

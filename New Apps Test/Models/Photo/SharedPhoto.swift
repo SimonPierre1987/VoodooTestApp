@@ -63,7 +63,7 @@ extension SharedPhoto {
             user: UserEntity.toUserDTO(userEntity: sharedPhoto.author),
             description: sharedPhoto.description,
             likedByUser: isLikedByUser,
-            likes: sharedPhoto.likes
+            likes: newNumberOfLike
         )
     }
 }
