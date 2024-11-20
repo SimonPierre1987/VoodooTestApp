@@ -44,7 +44,7 @@ final class AllPhotosService: AllPhotosServiceProtocol {
             // The photo will be updated accordingly locally.
             // Only the like/dislike will not be visible each time we fetch this photo again.
             Logger.appLog.error("Please read the disclaimers of AllPhotosService")
-            return PhotoEntity.toImageDTO(sharedPhoto: photo, isLikedByUser: true)
+            return PhotoEntity.toImageDTO(sharedPhoto: photo)
         }
     }
 
@@ -59,7 +59,7 @@ final class AllPhotosService: AllPhotosServiceProtocol {
             // The photo will be updated accordingly locally.
             // Only the like/dislike will not be visible each time we fetch this photo again.
             Logger.appLog.error("Please read the disclaimers of AllPhotosService")
-            return PhotoEntity.toImageDTO(sharedPhoto: photo, isLikedByUser: false)
+            return PhotoEntity.toImageDTO(sharedPhoto: photo)
         }
     }
 }

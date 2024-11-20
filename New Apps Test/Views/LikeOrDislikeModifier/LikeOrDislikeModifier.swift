@@ -34,9 +34,9 @@ struct LikeOrDislikeModifier: ViewModifier {
                         .frame(width: self.size, height: self.size, alignment: .center)
                         .task { await self.removeAnimatedLike() }
                 } else if !self.photo.isLikedByUser && self.showLikeAction {
-                    Image(systemName: "heart")
+                    Image(systemName: "heart.slash")
                         .resizable()
-                        .foregroundStyle(Color.black)
+                        .foregroundStyle(Color.white)
                         .frame(width: self.size, height: self.size, alignment: .center)
                         .task { await self.removeAnimatedLike() }
                 }
@@ -49,27 +49,27 @@ struct LikeOrDislikeModifier: ViewModifier {
 
 private extension LikeOrDislikeModifier {
     private func likeOrDislikePhoto() async {
-        if self.photo.isLikedByUser {
-            // On purpose I don't wait for the backend to satisfy the user visually.
-            // It's an optimistic behavior. Most of the time the backend will be satisfying the user desire (about likes)
-            // If the backend fails, the visual state will be reset and not corrupted
-            self.photo.isLikedByUser = false
-            withAnimation {
-                self.showLikeAction = true
-            }
-            let dislikedPhoto = await self.allPhotosService.dislike(photo: self.photo)
-            self.photo.isLikedByUser = dislikedPhoto.likedByUser ?? false
-        } else {
-            // On purpose I don't wait for the backend to satisfy the user visually.
-            // It's an optimistic behavior. Most of the time the backend will be satisfying the user desire (about likes)
-            // if the backend fails, the visual state will be reset and not corrupted
-            self.photo.isLikedByUser = true
-            withAnimation {
-                self.showLikeAction = true
-            }
-            let photoLiked = await self.allPhotosService.like(photo: self.photo)
-            self.photo.isLikedByUser = photoLiked.likedByUser ?? false
+        // On purpose I don't wait for the backend to satisfy the user visually.
+        // It's an optimistic behavior. Most of the time the backend will be satisfying the user desire (about likes)
+        // If the backend fails, the visual state will be reset and not corrupted
+        self.updatePhoto(isLiked: !self.photo.isLikedByUser)
+
+        withAnimation {
+            self.showLikeAction = true
         }
+        
+        let updatePhoto = self.photo.isLikedByUser ?
+        await self.allPhotosService.dislike(photo: self.photo) :
+        await self.allPhotosService.like(photo: self.photo)
+
+        self.photo.isLikedByUser = updatePhoto.likedByUser ?? false
+        self.photo.likes = updatePhoto.likes ?? 0
+
+    }
+
+    private func updatePhoto(isLiked: Bool) {
+        self.photo.isLikedByUser = isLiked
+        self.photo.likes = isLiked ? self.photo.likes + 1 : self.photo.likes - 1
     }
 
     private func removeAnimatedLike() async {

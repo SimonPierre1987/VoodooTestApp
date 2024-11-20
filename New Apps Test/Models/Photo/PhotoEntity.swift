@@ -25,7 +25,7 @@ final class PhotoEntity: Identifiable {
 
     let description: String?
     var isLikedByUser: Bool
-    let likes: Int
+    var likes: Int
 
     init(
         photoId: String,
@@ -60,15 +60,14 @@ extension PhotoEntity {
 }
 
 extension PhotoEntity {
-    static func toImageDTO(sharedPhoto: PhotoEntity, isLikedByUser: Bool) -> ImageDTO {
-        let newNumberOfLike = isLikedByUser ? sharedPhoto.likes + 1 : sharedPhoto.likes
+    static func toImageDTO(sharedPhoto: PhotoEntity) -> ImageDTO {
         return ImageDTO(
             id: sharedPhoto.photoId,
             urls: ContentSource.toImageUrlDTO(contentSource: sharedPhoto.contentSource),
             user: UserEntity.toUserDTO(userEntity: sharedPhoto.author),
             description: sharedPhoto.description,
-            likedByUser: isLikedByUser,
-            likes: newNumberOfLike
+            likedByUser: sharedPhoto.isLikedByUser,
+            likes: sharedPhoto.likes
         )
     }
 }
