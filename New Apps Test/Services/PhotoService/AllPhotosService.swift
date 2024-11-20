@@ -28,6 +28,7 @@ final class AllPhotosService: AllPhotosServiceProtocol {
             let endpoint = UnsplashAPIEndpoint.photo(page: page, countPerPage: FeedConstant.photosPerPage)
             return try await self.networkManager.performRequest(with: endpoint)
         } catch {
+            Logger.appLog.error("Error fetching images (possibly too many request 403) :\(error)")
             return []
         }
     }
