@@ -18,6 +18,8 @@ import SwiftUI
 @Observable
 final class FeedViewModel {
     var allFeedPhotos: [PhotoEntity] = []
+    var lastDisplayedPhoto: PhotoEntity?
+    var selectedUser: UserEntity?
 }
 
 struct FeedView: View {
@@ -28,9 +30,8 @@ struct FeedView: View {
 
     // MARK: - States
     @State var feedViewModel = FeedViewModel()
-    @State var lastDisplayedPhoto: PhotoEntity?
-    @State var selectedUser: UserEntity?
 
+    // MARK: - Navigation
     @State private var navigationPath = NavigationPath()
 
     var body: some View {
@@ -43,33 +44,41 @@ struct FeedView: View {
                         FeedItemView(
                             singlePhotoDownloader: self.singlePhotoDownloader,
                             feedPhoto: feedPhoto,
-                            lastDisplayedPhoto: self.$lastDisplayedPhoto,
-                            selectedUser: self.$selectedUser
+                            lastDisplayedPhoto: self.$feedViewModel.lastDisplayedPhoto,
+                            selectedUser: self.$feedViewModel.selectedUser
                         )
                         .padding(.bottom)
                     }
                 }
                 .padding()
-                .navigationDestination(for: PhotoEntity.self) { feedPhoto in
-                    ThreadChatView(thread: self.chatThread)
-                }
-                .navigationDestination(for: UserEntity.self) { user in
-                    UserProfileView(user: user, singlePhotoDownloader: self.singlePhotoDownloader)
-                }
+
+            }
+            .navigationDestination(for: PhotoEntity.self) { feedPhoto in
+                ThreadChatView(thread: self.chatThread)
+            }
+            .navigationDestination(for: UserEntity.self) { user in
+                UserProfileView(user: user, singlePhotoDownloader: self.singlePhotoDownloader)
             }
         }
-        .onChange(of: self.selectedUser, { oldValue, newValue in
-            guard let selectedUser else { return }
-            self.navigationPath.append(selectedUser)
-            self.selectedUser = nil
+        .onChange(of: self.feedViewModel.selectedUser, { _, _ in
+            self.navigateTo(selectedUser: self.feedViewModel.selectedUser)
         })
-        .onChange(of: self.lastDisplayedPhoto, { oldValue, newValue in
+        .onChange(of: self.feedViewModel.lastDisplayedPhoto, { oldValue, newValue in
             guard let lastDisplayedPhoto = newValue else { return }
             guard let photoIndex = self.feedViewModel.allFeedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
 
             Task { await self.fetchNextPage(for: photoIndex) }
         })
         .task { await self.fetch(nextPage: 1) }
+    }
+}
+
+// MARK: - Navigation
+private extension FeedView {
+    private func navigateTo(selectedUser: UserEntity?) {
+        guard let selectedUser else { return }
+        self.navigationPath.append(selectedUser)
+        self.feedViewModel.selectedUser = nil
     }
 }
 
