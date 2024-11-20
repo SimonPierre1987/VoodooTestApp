@@ -26,6 +26,7 @@
 		14E2F7362B9F6385007CCA2C /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2F7352B9F6385007CCA2C /* ChatService.swift */; };
 		B25968AA2CEE072400220F1E /* SinglePhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25968A92CEE072400220F1E /* SinglePhotoDownloader.swift */; };
 		B25968AD2CEE0CF800220F1E /* LikeOrDislikeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25968AC2CEE0CF800220F1E /* LikeOrDislikeModifier.swift */; };
+		B25968B02CEE153F00220F1E /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25968AF2CEE153F00220F1E /* PhotoView.swift */; };
 		B27DF7B12CECD5A4008000C4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B02CECD5A4008000C4 /* Endpoint.swift */; };
 		B27DF7B32CECD60A008000C4 /* UnsplashAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B22CECD60A008000C4 /* UnsplashAPIEndpoint.swift */; };
 		B27DF7B52CECD753008000C4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B42CECD753008000C4 /* NetworkManager.swift */; };
@@ -96,6 +97,7 @@
 		14E2F7352B9F6385007CCA2C /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		B25968A92CEE072400220F1E /* SinglePhotoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePhotoDownloader.swift; sourceTree = "<group>"; };
 		B25968AC2CEE0CF800220F1E /* LikeOrDislikeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeOrDislikeModifier.swift; sourceTree = "<group>"; };
+		B25968AF2CEE153F00220F1E /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		B27DF7B02CECD5A4008000C4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		B27DF7B22CECD60A008000C4 /* UnsplashAPIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIEndpoint.swift; sourceTree = "<group>"; };
 		B27DF7B42CECD753008000C4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		048E7C712C32ACB000B653F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B25968AE2CEE153900220F1E /* Photo */,
 				B25968AB2CEE0CE700220F1E /* LikeOrDislikeModifier */,
 				B27DF7D52CED28A8008000C4 /* User */,
 				B27DF7BD2CECE475008000C4 /* Feed */,
@@ -253,6 +256,14 @@
 				B25968AC2CEE0CF800220F1E /* LikeOrDislikeModifier.swift */,
 			);
 			path = LikeOrDislikeModifier;
+			sourceTree = "<group>";
+		};
+		B25968AE2CEE153900220F1E /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				B25968AF2CEE153F00220F1E /* PhotoView.swift */,
+			);
+			path = Photo;
 			sourceTree = "<group>";
 		};
 		B27DF7AF2CECD59B008000C4 /* Endpoint */ = {
@@ -576,6 +587,7 @@
 				B27DF7CA2CECF887008000C4 /* UserDTO.swift in Sources */,
 				14374FB22B989FD500131332 /* New_Apps_TestApp.swift in Sources */,
 				B25968AD2CEE0CF800220F1E /* LikeOrDislikeModifier.swift in Sources */,
+				B25968B02CEE153F00220F1E /* PhotoView.swift in Sources */,
 				048E7C6E2C2F3CE900B653F4 /* SharePhotoView.swift in Sources */,
 				14BEC9992C2DC3D6009D8493 /* Thread.swift in Sources */,
 				048E7C662C2F08B500B653F4 /* RootView.swift in Sources */,
