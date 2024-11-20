@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 struct UserProfileView: View {
     let user: UserEntity
 
@@ -34,6 +33,7 @@ struct UserProfileView: View {
             UserNameView(firstName: self.user.firstName,
                          lastName: self.user.lastName)
             UserBioView(bio: self.user.bio)
+            Spacer(minLength: UserLayoutConstant.margin)
             ScrollView {
                 LazyVGrid(columns: self.column, spacing: 0) {
                     ForEach(self.sharedPhotos, id: \.self) { sharedPhoto in
