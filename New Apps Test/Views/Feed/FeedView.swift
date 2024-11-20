@@ -15,13 +15,6 @@
 
 import SwiftUI
 
-@Observable
-final class FeedViewModel {
-    var allFeedPhotos: [PhotoEntity] = []
-    var lastDisplayedPhoto: PhotoEntity?
-    var selectedUser: UserEntity?
-}
-
 struct FeedView: View {
     // MARK: - Services
     private let photosDownloader = PhotosDownloader()

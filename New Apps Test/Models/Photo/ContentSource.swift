@@ -27,7 +27,7 @@ extension ContentSource {
 
     var image: Image? {
         switch self {
-        case .url(let uRL):
+        case .url:
             return nil
         case .image(let image):
             return image
