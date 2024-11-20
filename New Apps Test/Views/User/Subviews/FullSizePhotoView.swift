@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct FullSizePhotoView: View {
-    let image: Image
+    @Environment(\.dismiss) var dismiss
 
-    @Binding var photoToDisplayFullScreen: Image?
+    @Binding var photoToDisplayFullScreen: PhotoEntity?
 
     var body: some View {
-        image
-            .resizable()
-            .scaledToFill()
-            .background(Color.white)
-            .onTapGesture {
-                withAnimation {
-                    self.photoToDisplayFullScreen = nil
-                }
+        ZStack {
+            VStack {
+                Spacer()
+                AsyncImage(
+                    url: self.photoToDisplayFullScreen?.contentSource.imageUrl,
+                    content: { image in  image.resizable().aspectRatio(contentMode: .fit) },
+                    placeholder: { ProgressView().progressViewStyle(.circular) })
+                Spacer()
             }
+        }
+        .background(Color.black)
+        .ignoresSafeArea()
+        .onTapGesture {
+            withAnimation {
+                self.dismiss()
+            }
+        }
     }
 }

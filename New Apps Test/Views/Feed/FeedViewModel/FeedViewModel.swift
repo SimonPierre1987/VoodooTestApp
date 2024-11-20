@@ -13,4 +13,5 @@ final class FeedViewModel {
     var lastDisplayedPhoto: PhotoEntity?
     var photoToNavigate: PhotoEntity?
     var selectedUser: UserEntity?
+    var goToShareAPhoto: Bool = false
 }

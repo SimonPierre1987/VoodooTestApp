@@ -16,11 +16,10 @@ struct UserItemView: View {
 
     // MARK: - States
     @State var userPhoto: PhotoEntity
+    @Binding var photoToDisplayFullScreen: PhotoEntity?
+
     @State var showLikeAction: Bool = false
 
-    @State var savedImage: Image?
-    @Binding var photoToDisplayFullScreen: Image?
-    
     var body: some View {
         VStack {
             PhotoView(
@@ -30,12 +29,9 @@ struct UserItemView: View {
                 photo: self.$userPhoto
             )
             .likeOrDislikePhoto(photo: self.$userPhoto, showLikeAction: self.$showLikeAction, size: 32)
+
             HStack {
                 Image(systemName: self.userPhoto.isLikedByUser ? "heart.fill" : "heart")
-//                    .onTapGesture {
-//                        Task { await self.likeOrDislikePhoto() }
-//                    } 
-                // TODO: fix
                 Spacer()
                 Label("\(self.chatThread.messages.count)", systemImage: "message")
             }
@@ -45,7 +41,7 @@ struct UserItemView: View {
         .padding(.horizontal)
         .onTapGesture {
             withAnimation {
-                self.photoToDisplayFullScreen = self.savedImage
+                self.photoToDisplayFullScreen = self.userPhoto
             }
         }
     }

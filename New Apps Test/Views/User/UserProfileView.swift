@@ -18,7 +18,8 @@ struct UserProfileView: View {
     // MARK: State
     @State var usersPhotos: [PhotoEntity] = []
     @State var userPhotosAlreadyFetched = false
-    @State var photoToDisplayFullScreen: Image?
+    @State var photoToDisplayFullScreen: PhotoEntity?
+    @State var displayPhotoInFullScreen = false
 
     // MARK: - Layout
     let column = [
@@ -47,15 +48,16 @@ struct UserProfileView: View {
                 }
                 .padding()
             }
-            .overlay(alignment: .center) {
-                if let photoToDisplayFullScreen = self.photoToDisplayFullScreen {
-                    FullSizePhotoView(
-                        image: photoToDisplayFullScreen,
-                        photoToDisplayFullScreen: self.$photoToDisplayFullScreen)
-                    .transition(.asymmetric(insertion: .push(from: .bottom), removal: .push(from: .top)))
-                }
-            }
+            .fullScreenCover(isPresented: self.$displayPhotoInFullScreen, onDismiss: {
+                self.photoToDisplayFullScreen = nil
+            }, content: {
+                FullSizePhotoView(
+                    photoToDisplayFullScreen: self.$photoToDisplayFullScreen)
+            })
         }
+        .onChange(of: self.photoToDisplayFullScreen, { oldValue, newValue in
+            self.displayPhotoInFullScreen = self.photoToDisplayFullScreen != nil
+        })
         .task {
             await self.fetchUserPhotosIfNeeded()
         }
