@@ -32,6 +32,18 @@ extension UserEntity {
         return UserEntity(userDTO: UserDTO.currentUser)
     }
 
+    static func toUserDTO(userEntity: UserEntity) -> UserDTO {
+        return UserDTO(
+            id: userEntity.id,
+            username: userEntity.username,
+            firstName: userEntity.firstName,
+            lastName: userEntity.lastName,
+            bio: userEntity.bio,
+            links: UserLink.toLinkDTO(userLink: userEntity.links),
+            profileImage: UserProfileImage.toProfileImageDTO(userProfileImage: userEntity.profileImage)
+        )
+    }
+
     static var mockOne: UserEntity {
         return UserEntity(
             userDTO: UserDTO(

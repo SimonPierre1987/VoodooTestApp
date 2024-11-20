@@ -19,7 +19,7 @@ protocol Endpoint {
     var baseUrlSting: String { get }
     var path: String { get }
     var httpMethod: HTTPMethod { get }
-    var parameters: [String: String] { get }
+    var parameters: [String: String]? { get }
 
     func createURLRequest() -> URLRequest?
 }
@@ -30,7 +30,7 @@ extension Endpoint {
             return nil
         }
 
-        let queryItems = self.parameters.map { URLQueryItem(name: $0.key, value: $0.value)}
+        let queryItems = self.parameters?.map { URLQueryItem(name: $0.key, value: $0.value)}
         components.path = path
         components.queryItems = queryItems
 

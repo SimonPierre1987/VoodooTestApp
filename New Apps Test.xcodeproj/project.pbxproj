@@ -49,6 +49,7 @@
 		B27DF7EE2CED3F9F008000C4 /* UIScreen+size.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7ED2CED3F9F008000C4 /* UIScreen+size.swift */; };
 		B27DF7F12CED4136008000C4 /* FullSizePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7F02CED4136008000C4 /* FullSizePhotoView.swift */; };
 		B27DF7F32CED526F008000C4 /* OSLog+Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7F22CED526F008000C4 /* OSLog+Logger.swift */; };
+		B27DF7F82CED6257008000C4 /* ContentSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7F72CED6257008000C4 /* ContentSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		B27DF7ED2CED3F9F008000C4 /* UIScreen+size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+size.swift"; sourceTree = "<group>"; };
 		B27DF7F02CED4136008000C4 /* FullSizePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullSizePhotoView.swift; sourceTree = "<group>"; };
 		B27DF7F22CED526F008000C4 /* OSLog+Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Logger.swift"; sourceTree = "<group>"; };
+		B27DF7F72CED6257008000C4 /* ContentSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,9 +148,9 @@
 		048E7C6F2C32AC9E00B653F4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B27DF7F62CED624D008000C4 /* Photo */,
 				B27DF7DB2CED2CBC008000C4 /* User */,
 				14BEC9982C2DC3D6009D8493 /* Thread.swift */,
-				14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -396,6 +398,15 @@
 			path = PhotoDownloader;
 			sourceTree = "<group>";
 		};
+		B27DF7F62CED624D008000C4 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */,
+				B27DF7F72CED6257008000C4 /* ContentSource.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -560,6 +571,7 @@
 				B27DF7E22CED2ECB008000C4 /* UserProfileView.swift in Sources */,
 				B27DF7E82CED39C3008000C4 /* UserBioView.swift in Sources */,
 				B27DF7D22CED184C008000C4 /* LinkDTO.swift in Sources */,
+				B27DF7F82CED6257008000C4 /* ContentSource.swift in Sources */,
 				B27DF7D72CED28B0008000C4 /* UserProfilePictureView.swift in Sources */,
 				14374FDD2B98A02600131332 /* AllPhotosService.swift in Sources */,
 				B27DF7C62CECE93C008000C4 /* FeedConstant.swift in Sources */,

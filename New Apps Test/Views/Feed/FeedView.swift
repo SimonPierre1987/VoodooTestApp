@@ -108,7 +108,7 @@ private extension FeedView {
                         contentSource: .image(image),
                         chatThread: Thread(),
                         description: nil,
-                        likedByUser: false,
+                        isLikedByUser: false,
                         likes: 0
                     )
                     self.sharedPhotos.insert(newCurrentUserPhoto, at: 0)

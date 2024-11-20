@@ -17,4 +17,8 @@ extension UserLink {
         self.likes = linkDTO.likes
         self.photos = linkDTO.photos
     }
+
+    static func toLinkDTO(userLink: UserLink) -> LinkDTO {
+        return LinkDTO(photos: userLink.photos, likes: userLink.likes)
+    }
 }

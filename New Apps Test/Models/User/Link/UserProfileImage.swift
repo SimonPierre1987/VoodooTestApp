@@ -19,4 +19,12 @@ extension UserProfileImage {
         self.mediumUrl = URL(string: profileImageDTO.medium)
         self.largeUrl = URL(string: profileImageDTO.large)
     }
+
+    static func toProfileImageDTO(userProfileImage: UserProfileImage) -> ProfileImageDTO {
+        return ProfileImageDTO(
+            small: userProfileImage.smallUrl?.absoluteString ?? "",
+            medium: userProfileImage.mediumUrl?.absoluteString ?? "",
+            large: userProfileImage.largeUrl?.absoluteString ?? ""
+        )
+    }
 }

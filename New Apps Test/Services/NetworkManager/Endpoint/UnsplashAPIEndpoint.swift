@@ -12,6 +12,8 @@ enum UnsplashAPIEndpoint {
     case user(userName: String)
     case me
     case userPhotos(username: String)
+    case like(photoId: String)
+    case dislike(photoId: String)
 }
 
 extension UnsplashAPIEndpoint: Endpoint {
@@ -19,7 +21,7 @@ extension UnsplashAPIEndpoint: Endpoint {
 
     var baseUrlSting: String {
         switch self {
-        case .photo, .user, .me, .userPhotos:
+        case .photo, .user, .me, .userPhotos, .like, .dislike:
             return "https://api.unsplash.com/"
         }
     }
@@ -34,6 +36,10 @@ extension UnsplashAPIEndpoint: Endpoint {
             return "/me"
         case .userPhotos(let username):
             return "/users/\(username)/photos"
+        case .like(let photoId):
+            return "/photos/\(photoId)/like"
+        case .dislike(let photoId):
+            return "/photos/\(photoId)/like"
         }
     }
 
@@ -47,10 +53,14 @@ extension UnsplashAPIEndpoint: Endpoint {
             return HTTPMethod.get
         case .userPhotos:
             return HTTPMethod.get
+        case .like:
+            return HTTPMethod.post
+        case .dislike:
+            return HTTPMethod.delete
         }
     }
 
-    var parameters: [String: String] {
+    var parameters: [String: String]? {
         switch self {
         case .photo(let page, let count):
             let parameters = [
@@ -59,11 +69,15 @@ extension UnsplashAPIEndpoint: Endpoint {
             ]
             return parameters
         case .user:
-            return [:]
+            return nil
         case .me:
-            return [:]
+            return nil
         case .userPhotos:
-            return [:]
+            return nil
+        case .like:
+            return nil
+        case .dislike:
+            return nil
         }
     }
 }

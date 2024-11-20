@@ -38,13 +38,14 @@ struct FeedItemView: View {
             }
 
             HStack {
-                Label("\(String(self.sharedPhoto.likes)) likes", systemImage:  self.sharedPhoto.likedByUser ? "heart.fill" : "heart")
+                Label("\(String(self.sharedPhoto.likes)) likes", systemImage:  self.sharedPhoto.isLikedByUser ? "heart.fill" : "heart")
                 Spacer()
                 Label("\(sharedPhoto.chatThread.messages.count) messages", systemImage: "message")
             }
             .font(.caption)
             .foregroundStyle(.gray)
         }
+        .padding(.horizontal)
         .overlay(alignment: .topLeading) {
             UserProfilePictureView(
                 user: self.sharedPhoto.author,
@@ -55,6 +56,5 @@ struct FeedItemView: View {
         .onAppear {
             self.lastDisplayedPhoto = self.sharedPhoto
         }
-        .padding(.horizontal)
     }
 }

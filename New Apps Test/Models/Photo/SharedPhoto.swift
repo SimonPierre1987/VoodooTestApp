@@ -14,7 +14,6 @@
  */
 
 import Foundation
-import SwiftUI
 
 struct SharedPhoto: Identifiable {
     let id = UUID()
@@ -24,14 +23,9 @@ struct SharedPhoto: Identifiable {
     let chatThread: Thread
     
     let description: String?
-    let likedByUser: Bool
+    let isLikedByUser: Bool
     let likes: Int
 
-    enum ContentSource {
-        case url(URL)
-        case image(Image)
-        case embeddedAsset(String)
-    }
 }
 
 extension SharedPhoto {
@@ -43,7 +37,7 @@ extension SharedPhoto {
         self.contentSource = .url(url)
 
         self.description = imageDTO.description
-        self.likedByUser = imageDTO.likedByUser ?? false
+        self.isLikedByUser = imageDTO.likedByUser ?? false
         self.likes = imageDTO.likes ?? 0
 
         self.chatThread = chatThread
@@ -57,5 +51,19 @@ extension SharedPhoto: Hashable {
 
     static func == (lhs: SharedPhoto, rhs: SharedPhoto) -> Bool {
         lhs.id == rhs.id
+    }
+}
+
+extension SharedPhoto {
+    static func toImageDTO(sharedPhoto: SharedPhoto, isLikedByUser: Bool) -> ImageDTO {
+        let newNumberOfLike = isLikedByUser ? sharedPhoto.likes + 1 : sharedPhoto.likes
+        return ImageDTO(
+            id: sharedPhoto.photoId,
+            urls: ContentSource.toImageUrlDTO(contentSource: sharedPhoto.contentSource),
+            user: UserEntity.toUserDTO(userEntity: sharedPhoto.author),
+            description: sharedPhoto.description,
+            likedByUser: isLikedByUser,
+            likes: sharedPhoto.likes
+        )
     }
 }
