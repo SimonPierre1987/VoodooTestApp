@@ -36,7 +36,7 @@ struct UserProfilePictureView: View {
     var body: some View {
         AsyncImage(
             url: self.userProfileUrl,
-            content: { image in  image },
+            content: { image in  image.resizable().aspectRatio(contentMode: .fit) },
             placeholder: { ProgressView().progressViewStyle(.circular) })
         .frame(width: self.profileSize.width, height: self.profileSize.height)
         .clipShape(.rect(cornerRadius: self.profileSize.width))
