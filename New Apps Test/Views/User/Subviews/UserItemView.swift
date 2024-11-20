@@ -23,8 +23,13 @@ struct UserItemView: View {
     
     var body: some View {
         VStack {
-            PhotoView(singlePhotoDownloader: self.singlePhotoDownloader, width: UserLayoutConstant.fixedUserImageSize, height: UserLayoutConstant.fixedUserImageSize, photo: self.$userPhoto)
-                .likeOrDislikePhoto(photo: self.$userPhoto, showLikeAction: self.$showLikeAction, size: 32)
+            PhotoView(
+                singlePhotoDownloader: self.singlePhotoDownloader,
+                width: UserLayoutConstant.fixedUserImageSize,
+                height: UserLayoutConstant.fixedUserImageSize,
+                photo: self.$userPhoto
+            )
+            .likeOrDislikePhoto(photo: self.$userPhoto, showLikeAction: self.$showLikeAction, size: 32)
             HStack {
                 Image(systemName: self.userPhoto.isLikedByUser ? "heart.fill" : "heart")
 //                    .onTapGesture {
@@ -38,7 +43,6 @@ struct UserItemView: View {
             .foregroundStyle(.gray)
         }
         .padding(.horizontal)
-        .likeOrDislikePhoto(photo: self.$userPhoto, showLikeAction: self.$showLikeAction, size: 32)
         .onTapGesture {
             withAnimation {
                 self.photoToDisplayFullScreen = self.savedImage
