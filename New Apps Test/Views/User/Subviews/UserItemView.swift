@@ -11,6 +11,8 @@ import SwiftUI
 struct UserItemView: View {
     // MARK: Services
     let allPhotosService = AllPhotosService()
+    let singlePhotoDownloader: SinglePhotoDownloader
+    let chatThread = Thread.mock
 
     // MARK: - States
     @State var userPhoto: SharedPhoto
@@ -21,95 +23,26 @@ struct UserItemView: View {
     
     var body: some View {
         VStack {
-            switch self.userPhoto.contentSource {
-            case .url(let url):
-                AsyncImage(url: url) { image in
-                    image.resizable()
-                        .scaledToFill()
-                        .onAppear {
-                            self.savedImage = image
-                        }
-                } placeholder: {
-                    ProgressView().progressViewStyle(.circular)
-                }
-                .frame(width: UserLayoutConstant.fixedUserImageSize, 
-                       height: UserLayoutConstant.fixedUserImageSize)
-                .clipShape(.rect(cornerRadius: 20))
-            case .image(let image):
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UserLayoutConstant.fixedUserImageSize,
-                           height: UserLayoutConstant.fixedUserImageSize)
-                    .clipShape(.rect(cornerRadius: 20))
-            case .embeddedAsset(let string):
-                Image(string)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UserLayoutConstant.fixedUserImageSize,
-                           height: UserLayoutConstant.fixedUserImageSize)
-                    .clipShape(.rect(cornerRadius: 20))
-            }
-
+            PhotoView(singlePhotoDownloader: self.singlePhotoDownloader, width: UserLayoutConstant.fixedUserImageSize, height: UserLayoutConstant.fixedUserImageSize, photo: self.$userPhoto)
+                .likeOrDislikePhoto(photo: self.$userPhoto, showLikeAction: self.$showLikeAction, size: 32)
             HStack {
-                Image(systemName:  self.userPhoto.isLikedByUser ? "heart.fill" : "heart")
-                    .onTapGesture {
-                        Task {await self.likeOrDislikePhoto() }
-                    }
+                Image(systemName: self.userPhoto.isLikedByUser ? "heart.fill" : "heart")
+//                    .onTapGesture {
+//                        Task { await self.likeOrDislikePhoto() }
+//                    } 
+                // TODO: fix
                 Spacer()
-                Label("\(userPhoto.chatThread.messages.count)", systemImage: "message")
+                Label("\(self.chatThread.messages.count)", systemImage: "message")
             }
             .font(.caption)
             .foregroundStyle(.gray)
         }
         .padding(.horizontal)
-        .overlay(alignment: .center, content: {
-            if self.userPhoto.isLikedByUser && self.showLikeAction {
-                Image(systemName: "heart.fill").onAppear {
-                    Task { await self.removeAnimatedLike() }
-                }
-            } else if !self.userPhoto.isLikedByUser && self.showLikeAction {
-                Image(systemName: "heart").onAppear {
-                    Task { await self.removeAnimatedLike() }
-                }
-            }
-        })
-        .onTapGesture(count: 2, perform: {
-            Task { await self.likeOrDislikePhoto() }
-        })
+        .likeOrDislikePhoto(photo: self.$userPhoto, showLikeAction: self.$showLikeAction, size: 32)
         .onTapGesture {
             withAnimation {
                 self.photoToDisplayFullScreen = self.savedImage
             }
-        }
-    }
-}
-
-private extension UserItemView {
-    private func likeOrDislikePhoto() async {
-        if self.userPhoto.isLikedByUser {
-            let dislikedPhoto = await self.allPhotosService.dislike(photo: self.userPhoto)
-            self.userPhoto = SharedPhoto(imageDTO: dislikedPhoto, chatThread: self.userPhoto.chatThread)
-            withAnimation {
-                self.showLikeAction = true
-            }
-        } else {
-            let photoLiked = await self.allPhotosService.like(photo: self.userPhoto)
-            self.userPhoto = SharedPhoto(imageDTO: photoLiked, chatThread: self.userPhoto.chatThread)
-            withAnimation {
-                self.showLikeAction = true
-            }
-        }
-    }
-
-    private func removeAnimatedLike() async {
-        do {
-            try await Task.sleep(for: .seconds(1))
-            withAnimation {
-                self.showLikeAction = false
-            }
-        } catch {
-            self.showLikeAction = false
         }
     }
 }

@@ -14,43 +14,48 @@
  */
 
 import Foundation
+import SwiftUI
 
-struct SharedPhoto: Identifiable {
+@Observable
+final class SharedPhoto: Identifiable {
     let id = UUID()
     let photoId: String
     let author: UserEntity
     let contentSource: ContentSource
-    let chatThread: Thread
-    
+
     let description: String?
-    let isLikedByUser: Bool
+    var isLikedByUser: Bool
     let likes: Int
 
+    init(
+        photoId: String,
+        author: UserEntity,
+        contentSource: ContentSource,
+        description: String?,
+        isLikedByUser: Bool,
+        likes: Int
+    ) {
+        self.photoId = photoId
+        self.author = author
+        self.contentSource = contentSource
+        self.description = description
+        self.isLikedByUser = isLikedByUser
+        self.likes = likes
+    }
 }
 
 extension SharedPhoto {
-    init(imageDTO: ImageDTO,
-         chatThread: Thread) {
-        self.photoId = imageDTO.id
-        self.author = UserEntity(userDTO: imageDTO.user)
+    convenience init(imageDTO: ImageDTO) {
         let url = URL(string: imageDTO.urls.regular)!
-        self.contentSource = .url(url)
 
-        self.description = imageDTO.description
-        self.isLikedByUser = imageDTO.likedByUser ?? false
-        self.likes = imageDTO.likes ?? 0
-
-        self.chatThread = chatThread
-    }
-}
-
-extension SharedPhoto: Hashable {
-    func hash(into hasher: inout Hasher) {
-        return hasher.combine(id)
-    }
-
-    static func == (lhs: SharedPhoto, rhs: SharedPhoto) -> Bool {
-        lhs.id == rhs.id
+        self.init(
+            photoId: imageDTO.id,
+            author: UserEntity(userDTO: imageDTO.user),
+            contentSource: .url(url),
+            description: imageDTO.description ?? "",
+            isLikedByUser: imageDTO.likedByUser ?? false,
+            likes: imageDTO.likes ?? 0
+        )
     }
 }
 
@@ -67,3 +72,14 @@ extension SharedPhoto {
         )
     }
 }
+
+extension SharedPhoto: Hashable {
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
+
+    static func == (lhs: SharedPhoto, rhs: SharedPhoto) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+

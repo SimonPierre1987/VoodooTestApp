@@ -15,12 +15,19 @@
 
 import SwiftUI
 
+@Observable
+final class FeedViewModel {
+    var allFeedPhotos: [SharedPhoto] = []
+}
+
 struct FeedView: View {
     // MARK: - Services
-    private let photoDownloader = PhotosDownloader()
+    private let photosDownloader = PhotosDownloader()
+    private let singlePhotoDownloader = SinglePhotoDownloader()
+    private let chatThread = Thread.mock
 
     // MARK: - States
-    @State var allFeedPhotos: [SharedPhoto] = []
+    @State var feedViewModel = FeedViewModel()
     @State var lastDisplayedPhoto: SharedPhoto?
     @State var selectedUser: UserEntity?
 
@@ -32,23 +39,22 @@ struct FeedView: View {
                 LazyVStack {
                     self.listHeaderView
 
-                    ForEach(allFeedPhotos, id: \.self) { feedPhoto in
-                        NavigationLink(value: feedPhoto) {
-                            FeedItemView(
-                                feedPhoto: feedPhoto,
-                                lastDisplayedPhoto: self.$lastDisplayedPhoto,
-                                selectedUser: self.$selectedUser
-                            )
-                            .padding(.bottom)
-                        }
+                    ForEach(self.$feedViewModel.allFeedPhotos, id: \.self) { feedPhoto in
+                        FeedItemView(
+                            singlePhotoDownloader: self.singlePhotoDownloader,
+                            feedPhoto: feedPhoto,
+                            lastDisplayedPhoto: self.$lastDisplayedPhoto,
+                            selectedUser: self.$selectedUser
+                        )
+                        .padding(.bottom)
                     }
                 }
                 .padding()
                 .navigationDestination(for: SharedPhoto.self) { feedPhoto in
-                    ThreadChatView(thread: feedPhoto.chatThread)
+                    ThreadChatView(thread: self.chatThread)
                 }
                 .navigationDestination(for: UserEntity.self) { user in
-                    UserProfileView(user: user)
+                    UserProfileView(user: user, singlePhotoDownloader: self.singlePhotoDownloader)
                 }
             }
         }
@@ -59,7 +65,7 @@ struct FeedView: View {
         })
         .onChange(of: self.lastDisplayedPhoto, { oldValue, newValue in
             guard let lastDisplayedPhoto = newValue else { return }
-            guard let photoIndex = self.allFeedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
+            guard let photoIndex = self.feedViewModel.allFeedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
 
             Task { await self.fetchNextPage(for: photoIndex) }
         })
@@ -75,9 +81,9 @@ private extension FeedView {
     }
 
     private func fetch(nextPage: Page) async {
-        let newPhotos = await self.photoDownloader.photos(for: nextPage)
+        let newPhotos = await self.photosDownloader.photos(for: nextPage)
         let newFeedPhotos = newPhotos.toSharedPhoto()
-        self.allFeedPhotos.append(contentsOf: newFeedPhotos)
+        self.feedViewModel.allFeedPhotos.append(contentsOf: newFeedPhotos)
     }
 
     private func nextPageToLoad(for photoIndex: Int) -> Page? {
@@ -89,7 +95,7 @@ private extension FeedView {
     }
 
     private func shouldFetchNextPage(for photoIndex: Int) -> Bool {
-        return photoIndex == self.allFeedPhotos.count - FeedConstant.nextPhotoThreshold
+        return photoIndex == self.feedViewModel.allFeedPhotos.count - FeedConstant.nextPhotoThreshold
     }
 }
 
@@ -106,12 +112,11 @@ private extension FeedView {
                         photoId: UUID().uuidString,
                         author: UserEntity.currentUser,
                         contentSource: .image(image),
-                        chatThread: Thread(),
                         description: nil,
                         isLikedByUser: false,
                         likes: 0
                     )
-                    self.allFeedPhotos.insert(newCurrentUserPhoto, at: 0)
+                    self.feedViewModel.allFeedPhotos.insert(newCurrentUserPhoto, at: 0)
                     // TODO: Post the image.
                 }
             } label: {

@@ -31,6 +31,6 @@ struct ImageUrlDTO: Codable {
 
 extension Array where Element == ImageDTO {
     func toSharedPhoto() -> [SharedPhoto] {
-        return self.map { SharedPhoto(imageDTO: $0, chatThread: Thread.mock) }
+        return self.map { SharedPhoto(imageDTO: $0) }
     }
 }

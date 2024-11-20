@@ -13,6 +13,7 @@ struct UserProfileView: View {
 
     // MARK: - Services
     private let userService: UserService = UserService()
+    let singlePhotoDownloader: SinglePhotoDownloader
 
     // MARK: State
     @State var usersPhotos: [SharedPhoto] = []
@@ -38,6 +39,7 @@ struct UserProfileView: View {
                 LazyVGrid(columns: self.column, spacing: 0) {
                     ForEach(self.usersPhotos, id: \.self) { userPhoto in
                         UserItemView(
+                            singlePhotoDownloader: self.singlePhotoDownloader,
                             userPhoto: userPhoto,
                             photoToDisplayFullScreen: self.$photoToDisplayFullScreen)
                         .padding(.bottom)
@@ -66,7 +68,7 @@ private extension UserProfileView {
         do {
             let userPhotos = try await self.userService.getPhotos(for: self.user.username )
             self.usersPhotos = userPhotos
-                .map { SharedPhoto(imageDTO: $0, chatThread: Thread.mock )}
+                .map { SharedPhoto(imageDTO: $0)}
             self.userPhotosAlreadyFetched = true
         } catch {
             // Nothing to do
@@ -75,5 +77,5 @@ private extension UserProfileView {
 }
 
 #Preview {
-    UserProfileView(user: UserEntity.mockOne)
+    UserProfileView(user: UserEntity.mockOne, singlePhotoDownloader: SinglePhotoDownloader())
 }

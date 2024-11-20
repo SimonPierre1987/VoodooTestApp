@@ -10,42 +10,30 @@ import SwiftUI
 
 struct FeedItemView: View {
 
-    let feedPhoto: SharedPhoto
+    // MARK: - Services
+    let singlePhotoDownloader: SinglePhotoDownloader
+    let chatThread = Thread.mock
 
     // MARK: - State
+    @Binding var feedPhoto: SharedPhoto
+    @State var showLikeAction: Bool = false
+
     @Binding var lastDisplayedPhoto: SharedPhoto?
     @Binding var selectedUser: UserEntity?
 
     var body: some View {
         VStack {
-            switch self.feedPhoto.contentSource {
-            case .url(let url):
-                AsyncImage(url: url)
-                    .frame(width: 350, height: 300)
-                    .clipShape(.rect(cornerRadius: 20))
-            case .image(let image):
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 350, height: 300)
-                    .clipShape(.rect(cornerRadius: 20))
-            case .embeddedAsset(let string):
-                Image(string)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 350, height: 300)
-                    .clipShape(.rect(cornerRadius: 20))
-            }
-
+            PhotoView(singlePhotoDownloader: self.singlePhotoDownloader, width: 350, height: 300, photo: self.$feedPhoto)
+                .likeOrDislikePhoto(photo: self.$feedPhoto, showLikeAction: self.$showLikeAction, size: 100)
             HStack {
-                Label("\(String(self.feedPhoto.likes)) likes", systemImage:  self.feedPhoto.isLikedByUser ? "heart.fill" : "heart")
+                Label("\(String(self.feedPhoto.likes)) likes", 
+                      systemImage:  self.feedPhoto.isLikedByUser ? "heart.fill" : "heart")
                 Spacer()
-                Label("\(self.feedPhoto.chatThread.messages.count) messages", systemImage: "message")
+                Label("\(self.chatThread.messages.count) messages", systemImage: "message")
             }
             .font(.caption)
             .foregroundStyle(.gray)
         }
-        .padding(.horizontal)
         .overlay(alignment: .topLeading) {
             UserProfilePictureView(
                 user: self.feedPhoto.author,
@@ -53,6 +41,7 @@ struct FeedItemView: View {
                 selectedUser: self.$selectedUser
             )
         }
+        .padding(.horizontal)
         .onAppear {
             self.lastDisplayedPhoto = self.feedPhoto
         }
