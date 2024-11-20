@@ -77,5 +77,5 @@ private extension UserProfileView {
 }
 
 #Preview {
-    UserProfileView(user: UserEntity.mockOne, singlePhotoDownloader: SinglePhotoDownloader())
+    UserProfileView(user: UserEntity.currentUser, singlePhotoDownloader: SinglePhotoDownloader())
 }

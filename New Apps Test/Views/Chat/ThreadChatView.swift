@@ -16,7 +16,8 @@
 import SwiftUI
 
 struct ThreadChatView: View {
-    @State var thread: Thread
+    // MARK: - States
+    @State var thread: ChatThread
     @State var newMessage = ""
 
     var body: some View {
@@ -28,11 +29,24 @@ struct ThreadChatView: View {
                     }
                 }
             }
-
             inputView
         }
     }
+}
 
+// MARK: - Messaging
+private extension ThreadChatView {
+    private func submitNewMessage() {
+        let newThreadMessage = ThreadMessage(author: UserEntity.currentUser,
+                                             message: newMessage,
+                                             date: Date())
+        thread.messages.append(newThreadMessage)
+        newMessage = ""
+    }
+}
+
+// MARK: - ViewBuilder
+private extension ThreadChatView {
     @ViewBuilder
     private var inputView: some View {
         HStack {
@@ -54,49 +68,8 @@ struct ThreadChatView: View {
         .padding(.vertical, 10)
         .background(Color(white: 0.9))
     }
-
-    private func submitNewMessage() {
-        let newThreadMessage = ThreadMessage(author: User.mockUser1, 
-                                             message: newMessage,
-                                             date: Date())
-        thread.messages.append(newThreadMessage)
-        newMessage = ""
-    }
-}
-
-private struct ChatMessageView: View {
-    let message: ThreadMessage
-    var body: some View {
-        HStack {
-            if message.author.isSelf {
-                Spacer()
-                bubbleView
-                authorPhoto
-            } else {
-                authorPhoto
-                bubbleView
-                Spacer()
-            }
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 10)
-    }
-    
-    private var bubbleView: some View {
-        Text(message.message)
-            .padding(10)
-            .background(Color(white: 0.9))
-            .clipShape(.rect(cornerRadius: 20))
-    }
-
-    private var authorPhoto: some View {
-        Image(uiImage: UIImage(named: message.author.photo)!)
-            .resizable()
-            .frame(width: 40, height: 40)
-            .clipShape(.circle)
-    }
 }
 
 #Preview {
-    ThreadChatView(thread: Thread.mock)
+    ThreadChatView(thread: ChatThread.mock)
 }

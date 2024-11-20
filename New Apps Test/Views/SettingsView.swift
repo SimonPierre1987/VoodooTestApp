@@ -16,46 +16,72 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    private let currentUser = UserEntity.currentUser
+
+    // MARK: - State
+    @State var selectedUser: UserEntity?
+
+    // MARK: - Navigation
+    @State private var navigationPath = NavigationPath()
+
+    // MARK: - Services
+    private let singlePhotoDownloader = SinglePhotoDownloader()
+
     var body: some View {
-        Form {
-            Section {
-                Image(uiImage: UIImage(named: User.mockUser1.photo)!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(.horizontal, 40)
-                    .containerRelativeFrame(.horizontal)
-                    .clipShape(.circle)
-                HStack {
-                    Spacer()
-                    Text(User.mockUser1.name)
-                        .font(.title)
-                    Spacer()
+        NavigationStack(path: self.$navigationPath) {
+            Form {
+                Section {
+                    UserProfilePictureView(user: self.currentUser, profileSize: .large, selectedUser: self.$selectedUser)
+                        .padding(.horizontal, 40)
+                        .containerRelativeFrame(.horizontal)
+                    HStack {
+                        Spacer()
+                        Text(self.currentUser.firstName)
+                            .font(.title)
+                        Spacer()
+                    }
+                }
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+
+                Section {
+                    SettingsEntryLine(systemImage: "person", title: "Edit profile")
+                    SettingsEntryLine(systemImage: "person.slash.fill", title: "Blocked users")
+                }
+
+                Section {
+                    SettingsEntryLine(systemImage: "square.and.arrow.up", title: "Share the app")
+                    SettingsEntryLine(systemImage: "star.bubble", title: "Rate the app")
+                    SettingsEntryLine(systemImage: "envelope", title: "Contact us")
+                }
+
+                Section {
+                    SettingsEntryLine(systemImage: "shield", title: "Privacy policy")
+                    SettingsEntryLine(systemImage: "doc", title: "Terms")
+                }
+
+                Section {
+                    SettingsEntryLine(systemImage: "power", title: "Log out")
+                    SettingsEntryLine(systemImage: "trash", title: "Delete account")
                 }
             }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
-
-            Section {
-                SettingsEntryLine(systemImage: "person", title: "Edit profile")
-                SettingsEntryLine(systemImage: "person.slash.fill", title: "Blocked users")
+            .navigationDestination(for: UserEntity.self) { user in
+                UserProfileView(user: user, singlePhotoDownloader: self.singlePhotoDownloader)
             }
-
-            Section {
-                SettingsEntryLine(systemImage: "square.and.arrow.up", title: "Share the app")
-                SettingsEntryLine(systemImage: "star.bubble", title: "Rate the app")
-                SettingsEntryLine(systemImage: "envelope", title: "Contact us")
-            }
-
-            Section {
-                SettingsEntryLine(systemImage: "shield", title: "Privacy policy")
-                SettingsEntryLine(systemImage: "doc", title: "Terms")
-            }
-
-            Section {
-                SettingsEntryLine(systemImage: "power", title: "Log out")
-                SettingsEntryLine(systemImage: "trash", title: "Delete account")
-            }
+            .onChange(of: self.selectedUser, { _, _ in
+                self.navigateTo(selectedUser: self.selectedUser)
+            })
         }
+    }
+}
+
+// MARK: - Navigation
+private extension SettingsView {
+    private func navigateTo(selectedUser: UserEntity?) {
+        guard let selectedUser else { return }
+        self.navigationPath.append(selectedUser)
+        self.selectedUser = nil
     }
 }
 
@@ -65,7 +91,7 @@ private struct SettingsEntryLine: View {
     let title: String
 
     var body: some View {
-        Label(title, systemImage: systemImage)
+        Label(self.title, systemImage: self.systemImage)
     }
 }
 

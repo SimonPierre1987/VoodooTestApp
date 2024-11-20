@@ -19,7 +19,7 @@ struct FeedView: View {
     // MARK: - Services
     private let photosDownloader = PhotosDownloader()
     private let singlePhotoDownloader = SinglePhotoDownloader()
-    private let chatThread = Thread.mock
+    private let chatThread = ChatThread.mock
 
     // MARK: - States
     @State var feedViewModel = FeedViewModel()

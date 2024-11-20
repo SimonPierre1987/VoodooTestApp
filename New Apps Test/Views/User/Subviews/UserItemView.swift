@@ -12,7 +12,7 @@ struct UserItemView: View {
     // MARK: Services
     let allPhotosService = AllPhotosService()
     let singlePhotoDownloader: SinglePhotoDownloader
-    let chatThread = Thread.mock
+    let chatThread = ChatThread.mock
 
     // MARK: - States
     @State var userPhoto: PhotoEntity

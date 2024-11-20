@@ -50,7 +50,7 @@ extension PhotoEntity {
 
         self.init(
             photoId: imageDTO.id,
-            author: UserEntity(userDTO: imageDTO.user),
+            author: UserEntity(userDTO: imageDTO.user, isSelf: false),
             contentSource: .url(url),
             description: imageDTO.description ?? "",
             isLikedByUser: imageDTO.likedByUser ?? false,

@@ -12,7 +12,7 @@ struct FeedItemView: View {
 
     // MARK: - Services
     let singlePhotoDownloader: SinglePhotoDownloader
-    let chatThread = Thread.mock
+    let chatThread = ChatThread.mock
 
     // MARK: - State
     @Binding var feedPhoto: PhotoEntity
