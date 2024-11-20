@@ -20,6 +20,7 @@ struct FeedItemView: View {
 
     @Binding var lastDisplayedPhoto: PhotoEntity?
     @Binding var selectedUser: UserEntity?
+    @Binding var photoToNavigate: PhotoEntity?
 
     var body: some View {
         VStack {
@@ -42,9 +43,8 @@ struct FeedItemView: View {
             )
         }
         .padding(.horizontal)
-        .onAppear {
-            self.lastDisplayedPhoto = self.feedPhoto
-        }
+        .onAppear { self.lastDisplayedPhoto = self.feedPhoto }
+        .onTapGesture { self.photoToNavigate = self.feedPhoto }
     }
 }
 

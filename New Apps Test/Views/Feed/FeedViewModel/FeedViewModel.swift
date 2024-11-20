@@ -11,5 +11,6 @@ import SwiftUI
 final class FeedViewModel {
     var allFeedPhotos: [PhotoEntity] = []
     var lastDisplayedPhoto: PhotoEntity?
+    var photoToNavigate: PhotoEntity?
     var selectedUser: UserEntity?
 }

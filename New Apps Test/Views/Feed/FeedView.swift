@@ -32,19 +32,18 @@ struct FeedView: View {
             ScrollView {
                 LazyVStack {
                     self.listHeaderView
-
                     ForEach(self.$feedViewModel.allFeedPhotos, id: \.self) { feedPhoto in
                         FeedItemView(
                             singlePhotoDownloader: self.singlePhotoDownloader,
                             feedPhoto: feedPhoto,
                             lastDisplayedPhoto: self.$feedViewModel.lastDisplayedPhoto,
-                            selectedUser: self.$feedViewModel.selectedUser
+                            selectedUser: self.$feedViewModel.selectedUser,
+                            photoToNavigate: self.$feedViewModel.photoToNavigate
                         )
                         .padding(.bottom)
                     }
                 }
                 .padding()
-
             }
             .navigationDestination(for: PhotoEntity.self) { feedPhoto in
                 ThreadChatView(thread: self.chatThread)
@@ -56,11 +55,11 @@ struct FeedView: View {
         .onChange(of: self.feedViewModel.selectedUser, { _, _ in
             self.navigateTo(selectedUser: self.feedViewModel.selectedUser)
         })
+        .onChange(of: self.feedViewModel.photoToNavigate, { _, _ in
+            self.navigateToChat(photo: self.feedViewModel.photoToNavigate)
+        })
         .onChange(of: self.feedViewModel.lastDisplayedPhoto, { oldValue, newValue in
-            guard let lastDisplayedPhoto = newValue else { return }
-            guard let photoIndex = self.feedViewModel.allFeedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
-
-            Task { await self.fetchNextPage(for: photoIndex) }
+            self.triggerNextPageFetch(lastDisplayedPhoto: newValue)
         })
         .task { await self.fetch(nextPage: 1) }
     }
@@ -73,10 +72,23 @@ private extension FeedView {
         self.navigationPath.append(selectedUser)
         self.feedViewModel.selectedUser = nil
     }
+
+    private func navigateToChat(photo: PhotoEntity?) {
+        guard let photo else { return }
+        self.navigationPath.append(photo)
+        self.feedViewModel.photoToNavigate = nil
+    }
 }
 
 // MARK: - Pages to fetch
 private extension FeedView {
+    private func triggerNextPageFetch(lastDisplayedPhoto: PhotoEntity?) {
+        guard let lastDisplayedPhoto = lastDisplayedPhoto else { return }
+        guard let photoIndex = self.feedViewModel.allFeedPhotos.firstIndex(of: lastDisplayedPhoto) else { return }
+
+        Task { await self.fetchNextPage(for: photoIndex) }
+    }
+
     private func fetchNextPage(for photoIndex: Int) async {
         guard let page = self.nextPageToLoad(for: photoIndex) else { return }
         await self.fetch(nextPage: page)
