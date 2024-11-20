@@ -15,7 +15,7 @@ struct UserItemView: View {
     let chatThread = Thread.mock
 
     // MARK: - States
-    @State var userPhoto: SharedPhoto
+    @State var userPhoto: PhotoEntity
     @State var showLikeAction: Bool = false
 
     @State var savedImage: Image?

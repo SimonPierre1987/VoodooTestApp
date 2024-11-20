@@ -16,7 +16,7 @@ struct UserProfileView: View {
     let singlePhotoDownloader: SinglePhotoDownloader
 
     // MARK: State
-    @State var usersPhotos: [SharedPhoto] = []
+    @State var usersPhotos: [PhotoEntity] = []
     @State var userPhotosAlreadyFetched = false
     @State var photoToDisplayFullScreen: Image?
 
@@ -68,7 +68,7 @@ private extension UserProfileView {
         do {
             let userPhotos = try await self.userService.getPhotos(for: self.user.username )
             self.usersPhotos = userPhotos
-                .map { SharedPhoto(imageDTO: $0)}
+                .map { PhotoEntity(imageDTO: $0)}
             self.userPhotosAlreadyFetched = true
         } catch {
             // Nothing to do

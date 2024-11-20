@@ -15,10 +15,10 @@ struct FeedItemView: View {
     let chatThread = Thread.mock
 
     // MARK: - State
-    @Binding var feedPhoto: SharedPhoto
+    @Binding var feedPhoto: PhotoEntity
     @State var showLikeAction: Bool = false
 
-    @Binding var lastDisplayedPhoto: SharedPhoto?
+    @Binding var lastDisplayedPhoto: PhotoEntity?
     @Binding var selectedUser: UserEntity?
 
     var body: some View {

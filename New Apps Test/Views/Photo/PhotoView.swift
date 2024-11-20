@@ -16,7 +16,7 @@ struct PhotoView: View {
     let height: CGFloat
 
     // MARK: - States
-    @Binding var photo: SharedPhoto
+    @Binding var photo: PhotoEntity
     @State var photoImage: Image? = nil
 
     var body: some View {

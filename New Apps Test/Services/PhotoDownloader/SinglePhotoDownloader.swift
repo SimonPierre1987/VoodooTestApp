@@ -20,7 +20,7 @@ final actor SinglePhotoDownloader {
     private var cache: [PhotoIdentifier: CacheEntry] = [:]
 
     // MARK: - PhotosDownloaderProtocol
-    func image(for photo: SharedPhoto) async -> Image? {
+    func image(for photo: PhotoEntity) async -> Image? {
         if let cachedPhotos = self.cache[photo.photoId] {
             switch cachedPhotos {
             case .inProgress(let task):
@@ -43,7 +43,7 @@ final actor SinglePhotoDownloader {
 }
 
 private extension SinglePhotoDownloader {
-    private func getImage(for photo: SharedPhoto) async -> Image? {
+    private func getImage(for photo: PhotoEntity) async -> Image? {
             if let image = photo.contentSource.image {
                 return image
             } else if let imageUrl = photo.contentSource.imageUrl {

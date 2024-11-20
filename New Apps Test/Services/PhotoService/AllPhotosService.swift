@@ -33,7 +33,7 @@ final class AllPhotosService: AllPhotosServiceProtocol {
         }
     }
 
-    func like(photo: SharedPhoto) async -> ImageDTO {
+    func like(photo: PhotoEntity) async -> ImageDTO {
         do {
             let endpoint = UnsplashAPIEndpoint.like(photoId: photo.photoId)
             return try await self.networkManager.performRequest(with: endpoint)
@@ -44,11 +44,11 @@ final class AllPhotosService: AllPhotosServiceProtocol {
             // The photo will be updated accordingly locally.
             // Only the like/dislike will not be visible each time we fetch this photo again.
             Logger.appLog.error("Please read the disclaimers of AllPhotosService")
-            return SharedPhoto.toImageDTO(sharedPhoto: photo, isLikedByUser: true)
+            return PhotoEntity.toImageDTO(sharedPhoto: photo, isLikedByUser: true)
         }
     }
 
-    func dislike(photo: SharedPhoto) async -> ImageDTO {
+    func dislike(photo: PhotoEntity) async -> ImageDTO {
         do {
             let endpoint = UnsplashAPIEndpoint.dislike(photoId: photo.photoId)
             return try await self.networkManager.performRequest(with: endpoint)
@@ -59,7 +59,7 @@ final class AllPhotosService: AllPhotosServiceProtocol {
             // The photo will be updated accordingly locally.
             // Only the like/dislike will not be visible each time we fetch this photo again.
             Logger.appLog.error("Please read the disclaimers of AllPhotosService")
-            return SharedPhoto.toImageDTO(sharedPhoto: photo, isLikedByUser: false)
+            return PhotoEntity.toImageDTO(sharedPhoto: photo, isLikedByUser: false)
         }
     }
 }

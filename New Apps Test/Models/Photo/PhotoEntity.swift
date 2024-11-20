@@ -17,7 +17,7 @@ import Foundation
 import SwiftUI
 
 @Observable
-final class SharedPhoto: Identifiable {
+final class PhotoEntity: Identifiable {
     let id = UUID()
     let photoId: String
     let author: UserEntity
@@ -44,7 +44,7 @@ final class SharedPhoto: Identifiable {
     }
 }
 
-extension SharedPhoto {
+extension PhotoEntity {
     convenience init(imageDTO: ImageDTO) {
         let url = URL(string: imageDTO.urls.regular)!
 
@@ -59,8 +59,8 @@ extension SharedPhoto {
     }
 }
 
-extension SharedPhoto {
-    static func toImageDTO(sharedPhoto: SharedPhoto, isLikedByUser: Bool) -> ImageDTO {
+extension PhotoEntity {
+    static func toImageDTO(sharedPhoto: PhotoEntity, isLikedByUser: Bool) -> ImageDTO {
         let newNumberOfLike = isLikedByUser ? sharedPhoto.likes + 1 : sharedPhoto.likes
         return ImageDTO(
             id: sharedPhoto.photoId,
@@ -73,12 +73,12 @@ extension SharedPhoto {
     }
 }
 
-extension SharedPhoto: Hashable {
+extension PhotoEntity: Hashable {
     func hash(into hasher: inout Hasher) {
         return hasher.combine(id)
     }
 
-    static func == (lhs: SharedPhoto, rhs: SharedPhoto) -> Bool {
+    static func == (lhs: PhotoEntity, rhs: PhotoEntity) -> Bool {
         lhs.id == rhs.id
     }
 }

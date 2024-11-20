@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func likeOrDislikePhoto(photo: Binding<SharedPhoto>, showLikeAction: Binding<Bool>, size: CGFloat) -> some View {
+    func likeOrDislikePhoto(photo: Binding<PhotoEntity>, showLikeAction: Binding<Bool>, size: CGFloat) -> some View {
         modifier(LikeOrDislikeModifier(size: size, photo: photo, showLikeAction: showLikeAction))
     }
 }
@@ -21,7 +21,7 @@ struct LikeOrDislikeModifier: ViewModifier {
     let size: CGFloat
 
     // MARK: - State
-    @Binding var photo: SharedPhoto
+    @Binding var photo: PhotoEntity
     @Binding var showLikeAction: Bool
 
     func body(content: Content) -> some View {

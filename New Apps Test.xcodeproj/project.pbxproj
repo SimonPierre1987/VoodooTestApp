@@ -22,7 +22,7 @@
 		14BEC9952C2DC39B009D8493 /* ThreadChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC9942C2DC39B009D8493 /* ThreadChatView.swift */; };
 		14BEC9972C2DC3B5009D8493 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC9962C2DC3B5009D8493 /* User.swift */; };
 		14BEC9992C2DC3D6009D8493 /* Thread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC9982C2DC3D6009D8493 /* Thread.swift */; };
-		14BEC99B2C2DC3E1009D8493 /* SharedPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */; };
+		14BEC99B2C2DC3E1009D8493 /* PhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BEC99A2C2DC3E1009D8493 /* PhotoEntity.swift */; };
 		14E2F7362B9F6385007CCA2C /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E2F7352B9F6385007CCA2C /* ChatService.swift */; };
 		B25968AA2CEE072400220F1E /* SinglePhotoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25968A92CEE072400220F1E /* SinglePhotoDownloader.swift */; };
 		B25968AD2CEE0CF800220F1E /* LikeOrDislikeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25968AC2CEE0CF800220F1E /* LikeOrDislikeModifier.swift */; };
@@ -92,7 +92,7 @@
 		14BEC9942C2DC39B009D8493 /* ThreadChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadChatView.swift; sourceTree = "<group>"; };
 		14BEC9962C2DC3B5009D8493 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		14BEC9982C2DC3D6009D8493 /* Thread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thread.swift; sourceTree = "<group>"; };
-		14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPhoto.swift; sourceTree = "<group>"; };
+		14BEC99A2C2DC3E1009D8493 /* PhotoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEntity.swift; sourceTree = "<group>"; };
 		14C4BCC52B98A97F007B818F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		14E2F7352B9F6385007CCA2C /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		B25968A92CEE072400220F1E /* SinglePhotoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePhotoDownloader.swift; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		B27DF7F62CED624D008000C4 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				14BEC99A2C2DC3E1009D8493 /* SharedPhoto.swift */,
+				14BEC99A2C2DC3E1009D8493 /* PhotoEntity.swift */,
 				B27DF7F72CED6257008000C4 /* ContentSource.swift */,
 			);
 			path = Photo;
@@ -562,7 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14BEC99B2C2DC3E1009D8493 /* SharedPhoto.swift in Sources */,
+				14BEC99B2C2DC3E1009D8493 /* PhotoEntity.swift in Sources */,
 				14374FB42B989FD500131332 /* FeedView.swift in Sources */,
 				B27DF7D42CED1857008000C4 /* ProfileImageDTO.swift in Sources */,
 				B27DF7D02CED00AE008000C4 /* UserEntity.swift in Sources */,

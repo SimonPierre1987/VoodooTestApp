@@ -17,7 +17,7 @@ import SwiftUI
 
 @Observable
 final class FeedViewModel {
-    var allFeedPhotos: [SharedPhoto] = []
+    var allFeedPhotos: [PhotoEntity] = []
 }
 
 struct FeedView: View {
@@ -28,7 +28,7 @@ struct FeedView: View {
 
     // MARK: - States
     @State var feedViewModel = FeedViewModel()
-    @State var lastDisplayedPhoto: SharedPhoto?
+    @State var lastDisplayedPhoto: PhotoEntity?
     @State var selectedUser: UserEntity?
 
     @State private var navigationPath = NavigationPath()
@@ -50,7 +50,7 @@ struct FeedView: View {
                     }
                 }
                 .padding()
-                .navigationDestination(for: SharedPhoto.self) { feedPhoto in
+                .navigationDestination(for: PhotoEntity.self) { feedPhoto in
                     ThreadChatView(thread: self.chatThread)
                 }
                 .navigationDestination(for: UserEntity.self) { user in
@@ -108,7 +108,7 @@ private extension FeedView {
 
             NavigationLink {
                 SharePhotoView { image in
-                    let newCurrentUserPhoto = SharedPhoto(
+                    let newCurrentUserPhoto = PhotoEntity(
                         photoId: UUID().uuidString,
                         author: UserEntity.currentUser,
                         contentSource: .image(image),

@@ -30,7 +30,7 @@ struct ImageUrlDTO: Codable {
 }
 
 extension Array where Element == ImageDTO {
-    func toSharedPhoto() -> [SharedPhoto] {
-        return self.map { SharedPhoto(imageDTO: $0) }
+    func toSharedPhoto() -> [PhotoEntity] {
+        return self.map { PhotoEntity(imageDTO: $0) }
     }
 }
