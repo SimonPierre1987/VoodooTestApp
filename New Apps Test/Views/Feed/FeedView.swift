@@ -103,9 +103,13 @@ private extension FeedView {
             NavigationLink {
                 SharePhotoView { image in
                     let newCurrentUserPhoto = SharedPhoto(
+                        photoId: UUID().uuidString,
                         author: UserEntity.currentUser,
                         contentSource: .image(image),
-                        chatThread: Thread()
+                        chatThread: Thread(),
+                        description: nil,
+                        likedByUser: false,
+                        likes: 0
                     )
                     self.sharedPhotos.insert(newCurrentUserPhoto, at: 0)
                     // TODO: Post the image.

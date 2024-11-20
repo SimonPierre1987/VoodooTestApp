@@ -8,11 +8,21 @@
 import Foundation
 
 struct ImageDTO: Codable {
+    private enum CodingKeys: String, CodingKey  {
+        case id
+        case urls
+        case user
+        case description
+        case likedByUser = "liked_by_user"
+        case likes
+    }
+
     let id: String
     let urls: ImageUrlDTO
     let user: UserDTO
     let description: String?
     let likedByUser: Bool?
+    let likes: Int?
 }
 
 struct ImageUrlDTO: Codable {

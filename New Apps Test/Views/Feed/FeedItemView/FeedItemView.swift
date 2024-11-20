@@ -38,7 +38,7 @@ struct FeedItemView: View {
             }
 
             HStack {
-                Text("Photo shared by " + sharedPhoto.author.firstName)
+                Label("\(String(self.sharedPhoto.likes)) likes", systemImage:  self.sharedPhoto.likedByUser ? "heart.fill" : "heart")
                 Spacer()
                 Label("\(sharedPhoto.chatThread.messages.count) messages", systemImage: "message")
             }

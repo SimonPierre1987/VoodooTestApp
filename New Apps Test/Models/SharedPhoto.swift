@@ -17,11 +17,16 @@ import Foundation
 import SwiftUI
 
 struct SharedPhoto: Identifiable {
-    let id = UUID() // TODO: use the backend id
+    let id = UUID()
+    let photoId: String
     let author: UserEntity
     let contentSource: ContentSource
     let chatThread: Thread
     
+    let description: String?
+    let likedByUser: Bool
+    let likes: Int
+
     enum ContentSource {
         case url(URL)
         case image(Image)
@@ -32,10 +37,16 @@ struct SharedPhoto: Identifiable {
 extension SharedPhoto {
     init(imageDTO: ImageDTO,
          chatThread: Thread) {
+        self.photoId = imageDTO.id
+        self.author = UserEntity(userDTO: imageDTO.user)
         let url = URL(string: imageDTO.urls.regular)!
         self.contentSource = .url(url)
+
+        self.description = imageDTO.description
+        self.likedByUser = imageDTO.likedByUser ?? false
+        self.likes = imageDTO.likes ?? 0
+
         self.chatThread = chatThread
-        self.author = UserEntity(userDTO: imageDTO.user)
     }
 }
 
