@@ -27,6 +27,7 @@
 		B25968AD2CEE0CF800220F1E /* LikeOrDislikeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25968AC2CEE0CF800220F1E /* LikeOrDislikeModifier.swift */; };
 		B25968B02CEE153F00220F1E /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25968AF2CEE153F00220F1E /* PhotoView.swift */; };
 		B25BD9722CEEAB3D0065539C /* FeedHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25BD9712CEEAB3D0065539C /* FeedHeaderView.swift */; };
+		B25BD9762CEEBAC30065539C /* PhotosDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25BD9732CEEB7170065539C /* PhotosDownloaderTests.swift */; };
 		B260572C2CEE241B00A60B87 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260572B2CEE241B00A60B87 /* FeedViewModel.swift */; };
 		B26057302CEE3E5200A60B87 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B260572F2CEE3E5200A60B87 /* ChatMessageView.swift */; };
 		B27DF7B12CECD5A4008000C4 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27DF7B02CECD5A4008000C4 /* Endpoint.swift */; };
@@ -100,6 +101,7 @@
 		B25968AC2CEE0CF800220F1E /* LikeOrDislikeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeOrDislikeModifier.swift; sourceTree = "<group>"; };
 		B25968AF2CEE153F00220F1E /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		B25BD9712CEEAB3D0065539C /* FeedHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedHeaderView.swift; sourceTree = "<group>"; };
+		B25BD9732CEEB7170065539C /* PhotosDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDownloaderTests.swift; sourceTree = "<group>"; };
 		B260572B2CEE241B00A60B87 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		B260572F2CEE3E5200A60B87 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		B27DF7B02CECD5A4008000C4 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 			children = (
 				B27DF7C22CECE574008000C4 /* PhotosDownloader.swift */,
 				B25968A92CEE072400220F1E /* SinglePhotoDownloader.swift */,
+				B25BD9732CEEB7170065539C /* PhotosDownloaderTests.swift */,
 			);
 			path = PhotosDownloader;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14374FC42B989FD700131332 /* New_Apps_TestTests.swift in Sources */,
+				B25BD9762CEEBAC30065539C /* PhotosDownloaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +852,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK97SYNVXK;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -870,6 +875,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK97SYNVXK;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -891,6 +897,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B5V9Z928QQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -912,6 +919,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B5V9Z928QQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
