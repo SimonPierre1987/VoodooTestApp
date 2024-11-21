@@ -46,6 +46,7 @@ I hope this feature will demonstrate my abilities to implement a feature correct
 ## User Profile
 I implemented a minimal user profile view to show my ability to create SwiftUI view, organize the SwiftUI View hiearchies and how to share states between views with methodology.
 Thanks to the SinglePhotoDownloader images that were downloaded in the past are not refetched.
+The current user can like/dislike photo directly from this page and can also see the picture in full screen.
 
 ## Navigation to user profile
 From a user profile picture displayed on a photo, the current user can navigate to the user profile.
